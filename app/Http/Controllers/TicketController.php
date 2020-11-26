@@ -17,6 +17,7 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
+        logger("index");
         $tickets = Ticket::all();
 
         return view('ticket.index', compact('tickets'));

@@ -18,8 +18,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('global/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/css/bootstrap-extend.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
 
     <!-- Plugins -->
     <link rel="stylesheet" href="{{ asset('global/vendor/animsition/animsition.css') }}">
@@ -34,8 +33,6 @@
     <link rel="stylesheet" href="{{ asset('global/fonts/web-icons/web-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/fonts/brand-icons/brand-icons.min.css') }}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-
-    @stack('custom_css')
 
     <!--[if lt IE 9]>
     <script src="{{ asset('global/vendor/html5shiv/html5shiv.min.js') }}"></script>
@@ -57,6 +54,10 @@
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+    @include('partials.navbar')
+    @include('partials.side_menu_bar')
+    @include('partials.grid_menu')
 
     <div class="page">
         @yield('content')
@@ -103,7 +104,7 @@
     <script src="{{ asset('global/js/Plugin/switchery.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/jquery-placeholder.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/input-group-file.js') }}"></script>
-    @stack('custom_js')
+
     <script>
         (function(document, window, $){
         'use strict';

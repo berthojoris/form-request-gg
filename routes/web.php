@@ -19,10 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('fileupload', App\Http\Controllers\FileuploadController::class)->only('index', 'store', 'destroy');
+Route::group(['prefix' => 'ticket'], function () {
+    Route::get('/', 'TicketController@index')->name('ticket_index');
+    Route::post('/store', 'TicketController@store')->name('ticket_store');
+});
 
-Route::resource('ticket', App\Http\Controllers\TicketController::class)->except('create');
-
-Route::resource('tickethistory', App\Http\Controllers\TickethistoryController::class)->except('create', 'destroy');
+Route::get('fileupload', 'FileuploadController@index')->name('upload_index');
+Route::get('tickethistory', 'TickethistoryController@index')->name('upload_index');
