@@ -16,12 +16,12 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('uuid');
-            $table->enum('status', ["OPEN","CLOSE"]);
+            $table->enum('status', ["OPEN", "CLOSE"]);
             $table->string('project_id');
             $table->string('project_name');
             $table->string('departemen_request');
+            $table->string('pic_request');
             $table->unsignedBigInteger('user_destination');
-            $table->string('username_submited');
             $table->string('email_submited');
             $table->string('digital_asset');
             $table->text('background');

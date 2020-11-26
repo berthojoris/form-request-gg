@@ -29,7 +29,7 @@ class FileuploadFactory extends Factory
             'file_size' => $this->faker->word,
             'file_saved_path' => $this->faker->word,
             'random_name' => $this->faker->word,
-            'uploaded_by' => User::factory(),
+            'uploaded_by' => User::all()->random(),
         ];
     }
 }

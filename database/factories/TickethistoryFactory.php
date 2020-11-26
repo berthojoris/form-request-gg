@@ -25,8 +25,8 @@ class TickethistoryFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid,
-            'ticket_id' => Ticket::factory(),
-            'status' => $this->faker->randomElement(["ACCEPTED","ON_PROGRESS","PENDING","CANCELED","DONE"]),
+            'ticket_id' => Ticket::all()->random(),
+            'status' => $this->faker->randomElement(["ACCEPTED", "ON_PROGRESS", "PENDING", "CANCELED", "DONE"]),
             'note' => $this->faker->text,
             'document_upload' => $this->faker->word,
         ];

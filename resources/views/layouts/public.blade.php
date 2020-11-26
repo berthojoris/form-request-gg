@@ -29,12 +29,10 @@
     <link rel="stylesheet" href="{{ asset('global/vendor/slidepanel/slidePanel.css') }}">
     <link rel="stylesheet" href="{{ asset('global/vendor/flag-icon-css/flag-icon.css') }}">
 
-
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('global/fonts/web-icons/web-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/fonts/brand-icons/brand-icons.min.css') }}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-
     @stack('custom_css')
 
     <!--[if lt IE 9]>
@@ -79,6 +77,7 @@
     <script src="{{ asset('global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
     <script src="{{ asset('global/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
 
+
     <!-- Scripts -->
     <script src="{{ asset('global/js/Component.js') }}"></script>
     <script src="{{ asset('global/js/Plugin.js') }}"></script>
@@ -93,9 +92,9 @@
 
     <script src="{{ asset('global/js/config/colors.js') }}"></script>
     <script src="{{ asset('assets/js/config/tour.js') }}"></script>
-    <script>
+    {{-- <script>
         Config.set('assets', '../../assets');
-    </script>
+    </script> --}}
 
     <script src="{{ asset('assets/js/Site.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/asscrollable.js') }}"></script>

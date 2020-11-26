@@ -25,12 +25,12 @@ class TicketFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid,
-            'status' => $this->faker->randomElement(["OPEN","CLOSE"]),
+            'status' => $this->faker->randomElement(["OPEN", "CLOSE"]),
             'project_id' => $this->faker->word,
             'project_name' => $this->faker->word,
             'departemen_request' => $this->faker->word,
-            'user_destination' => User::factory(),
-            'username_submited' => $this->faker->word,
+            'user_destination' => User::all()->random(),
+            'pic_request' => $this->faker->name,
             'email_submited' => $this->faker->word,
             'digital_asset' => $this->faker->word,
             'background' => $this->faker->text,

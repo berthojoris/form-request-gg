@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TicketStoreRequest;
-use App\Http\Requests\TicketUpdateRequest;
-use App\Jobs\JobTicketCreated;
-use App\Jobs\JobTicketUpdated;
+use App\Models\User;
+use App\Models\Brand;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use App\Jobs\JobTicketCreated;
+use App\Jobs\JobTicketUpdated;
+use App\Http\Requests\TicketStoreRequest;
+use App\Http\Requests\TicketUpdateRequest;
 
 class TicketController extends Controller
 {
@@ -17,10 +19,14 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        logger("index");
         $tickets = Ticket::all();
+        $accountDigital = User::all()->pluck('name', 'id')->toArray();
+        $brandName = Brand::all()->pluck('name', 'id')->toArray();
+        $projectID = generateProjectID();
+        session()->forget('projectid');
+        session()->put('projectid', $projectID);
 
-        return view('ticket.index', compact('tickets'));
+        return view('ticket.index', compact('tickets', 'accountDigital', 'brandName'));
     }
 
     /**

@@ -1,0 +1,12 @@
+.fieldColor {
+    border-color: #afc7cf;
+}
+
+.required {
+    color: red;
+    margin-left: 5px;
+}
+
+.checkBorderRed {
+    border-color: red;
+}

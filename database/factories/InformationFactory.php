@@ -29,7 +29,7 @@ class InformationFactory extends Factory
             'slug' => $this->faker->slug,
             'content' => $this->faker->paragraphs(3, true),
             'document_attached' => $this->faker->word,
-            'created_by' => User::factory(),
+            'created_by' => User::all()->random(),
         ];
     }
 }
