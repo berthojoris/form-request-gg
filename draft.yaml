@@ -1,0 +1,134 @@
+models:
+  Fileupload:
+    file_name: string
+    file_ext: string
+    file_size: string
+    file_saved_path: string
+    random_name: string
+    uploaded_by: id:User
+    timestamps: true
+    softDeletes: true
+
+  Log:
+    uuid: string
+    ip: string
+    full_url: string
+    controller_name: string
+    function_name: string
+    method_name: string
+    browser: string nullable
+    timestamps: true
+    softDeletes: true
+
+  Brand:
+    name: string
+    brand_img: string nullable
+    timestamps: true
+    softDeletes: true
+
+  Information:
+    uuid: uuid
+    title: string
+    slug: string
+    content: longtext
+    document_attached: string nullable
+    created_by: id:User
+    timestamps: true
+    softDeletes: true
+
+  Ticket:
+    uuid: string
+    status: enum:OPEN,CLOSE
+    project_id: string
+    project_name: string
+    departemen_request: string
+    user_destination: id:user
+    username_submited: string
+    email_submited: string
+    digital_asset: string
+    background: text
+    objective: text
+    target_audience: string
+    creatif_consideration: text
+    support_other_channel: string
+    kpi: string
+    requirement_rules: string
+    reference: string
+    project_brief: string
+    campaign_period_start: date
+    campaign_period_end: date
+    estimated_budget: double:12,0
+    document_upload: string nullable
+    timestamps: true
+    softDeletes: true
+
+  Tickethistory:
+    uuid: string
+    ticket_id: id:Ticket
+    status: enum:ACCEPTED,ON_PROGRESS,PENDING,CANCELED,DONE
+    note: text
+    document_upload: string nullable
+    timestamps: true
+    softDeletes: true
+
+controllers:
+  Fileupload:
+    index:
+      query: all
+      render: file_upload.index with:fileuploads
+    store:
+      validate: Fileupload
+      save: fileupload
+      flash: fileupload
+      redirect: fileupload.index
+    destroy:
+      delete: fileupload
+      redirect: fileupload.index
+
+  Ticket:
+    index:
+      query: all
+      render: ticket.index with:tickets
+    show:
+      render: ticket.show with:ticket
+    edit:
+      render: ticket.edit with:tickets
+    store:
+      validate: ticket
+      save: ticket
+      notify: ticket.id NotifyTicketCreated with:ticket
+      dispatch: JobTicketCreated with:ticket
+      flash: ticket.project_name
+      redirect: ticket.index
+    update:
+      validate: ticket
+      update: ticket
+      notify: ticket.id NotifyTicketCreated with:ticket
+      dispatch: JobTicketUpdated with:ticket
+      flash: ticket.project_name
+      redirect: ticket.index
+    destroy:
+      delete: ticket
+      redirect: ticket.index
+
+  Tickethistory:
+    index:
+      query: all
+      render: tickethistory.index with:tickethistories
+    show:
+      render: tickethistory.show with:tickethistory
+    store:
+      validate: tickethistory
+      save: tickethistory
+      flash: tickethistory
+      redirect: tickethistory.index
+    edit:
+      render: tickethistory.edit with:tickethistory
+    update:
+      validate: tickethistory
+      update: tickethistory
+      notify: ticket.id NotifyTicketCreated with:tickethistory
+      flash: tickethistory
+      redirect: tickethistory.index
+
+seeders: Ticket, Tickethistory, Fileupload, Log, Brand, Information
