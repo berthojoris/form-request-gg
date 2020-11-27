@@ -58,8 +58,20 @@ class TicketController extends Controller
     {
 
         $pb = $request->file('project_brief');
+        $du = $request->file('document_upload');
 
-        $newFileName = Str::random(10) . "." . $pb->getClientOriginalExtension();
+        if (!empty($du)) {
+            $newFileName = Str::random(20) . "." . $pb->getClientOriginalExtension();
+        } else {
+            $newFileName = "empty.jpg";
+        }
+
+        if (!empty($du)) {
+            $documentUpload = Str::random(20) . "." . $du->getClientOriginalExtension();
+        } else {
+            $documentUpload = "empty.jpg";
+        }
+
         $destination = 'uploads';
 
         $ticket = Ticket::create([
@@ -78,12 +90,18 @@ class TicketController extends Controller
             'requirement_rules' => $request->requirement_rules,
             'reference' => $request->reference,
             'project_brief' => $newFileName,
-            'document_upload' => 'empty.jpg',
+            'document_upload' => $documentUpload,
             'campaign_period_start' => indonesianDate($request->start),
             'campaign_period_end' => indonesianDate($request->end)
         ]);
 
-        $pb->move($destination, $newFileName);
+        if (!empty($pb)) {
+            $pb->move($destination, $newFileName);
+        }
+
+        if (!empty($du)) {
+            $du->move($destination, $documentUpload);
+        }
 
         // $ticket->id->notify(new NotifyTicketCreated($ticket));
 

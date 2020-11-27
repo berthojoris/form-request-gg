@@ -310,6 +310,17 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Additional Document</label>
+                        <div class="col-md-6">
+                            <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""
+                                name="document_upload" class="@error('document_upload') is-invalid @enderror" />
+                            @error('document_upload') <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Project Timeline<span
