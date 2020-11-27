@@ -20,6 +20,11 @@
                 @endforeach
                 @endif
 
+                @if(Session::has('ticket.project_name'))
+                <p class="alert {{ Session::get('alert-class', 'alert-success') }}">
+                    {{ Session::get('ticket.project_name') }} berhasil disubmit</p>
+                @endif
+
                 <form method="POST" action="{{ route('ticket_store') }}" enctype="multipart/form-data">
                     @csrf
 
@@ -122,41 +127,41 @@
                                 class="required">*</span></label>
                         <div class="col-md-3 @error('digital_asset') is-invalid @enderror">
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Webiste">
                                 <label for="digital_asset[]">Webiste</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Mobile Apps">
                                 <label for="digital_asset[]">Mobile Apps</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Instagram">
                                 <label for="digital_asset[]">Instagram</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Facebook">
                                 <label for="digital_asset[]">Facebook</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Twitter">
                                 <label for="digital_asset[]">Twitter</label>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Youtube">
                                 <label for="digital_asset[]">Youtube</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Facebook Group">
                                 <label for="digital_asset[]">Facebook Group</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="SMS Blast">
                                 <label for="digital_asset[]">SMS Blast</label>
                             </div>
                             <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]">
+                                <input type="checkbox" name="digital_asset[]" value="Email Blast">
                                 <label for="digital_asset[]">Email Blast</label>
                             </div>
                         </div>
@@ -200,11 +205,11 @@
                                 class="required">*</span></label>
                         <div class="col-md-6 @error('target_audience') is-invalid @enderror">
                             <div class="radio-custom checkbox-primary">
-                                <input type="radio" name="target_audience">
+                                <input type="radio" name="target_audience" value="National Wide">
                                 <label for="target_audience">National Wide</label>
                             </div>
                             <div class="radio-custom checkbox-primary">
-                                <input type="radio" name="target_audience">
+                                <input type="radio" name="target_audience" value="Input Your City">
                                 <label for="target_audience">Input Your City</label>
                             </div>
                         </div>
@@ -219,11 +224,11 @@
                         <label for="name" class="col-md-4 col-form-label text-md-right">Creatif Consideration<span
                                 class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="creatif_consideration" type="text"
-                                class="form-control fieldColor @error('creatif_consideration') is-invalid @enderror"
-                                name="creatif_consideration" value="{{ old('creatif_consideration') }}"
+                            <input id="creative_consideration" type="text"
+                                class="form-control fieldColor @error('creative_consideration') is-invalid @enderror"
+                                name="creative_consideration" value="{{ old('creative_consideration') }}"
                                 autocomplete="off">
-                            @error('creatif_consideration')
+                            @error('creative_consideration')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -277,6 +282,7 @@
                         </div>
                     </div>
 
+
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Reference<span
                                 class="required">*</span></label>
@@ -295,9 +301,6 @@
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Project Brief</label>
                         <div class="col-md-6">
-                            {{-- <input id="project_brief" type="text"
-                                class="form-control fieldColor @error('project_brief') is-invalid @enderror"
-                                name="project_brief" value="{{ old('project_brief') }}" autocomplete="off"> --}}
                             <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""
                                 name="project_brief" class="@error('project_brief') is-invalid @enderror" />
                             @error('project_brief') <span class="invalid-feedback" role="alert">
@@ -306,6 +309,7 @@
                             @enderror
                         </div>
                     </div>
+
 
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Project Timeline<span
@@ -336,10 +340,8 @@
                                 class="required">*</span></label>
                         <div class="col-md-6">
                             <input type="text"
-                                class="form-control fieldColor @error('project_brief') is-invalid @enderror"
-                                id="inputCurrency" data-plugin="formatter"
-                                data-pattern="Rp [[999]].[[999]].[[999]].[[999]]" name="estimated_budget"
-                                value="{{ old('estimated_budget') }}" />
+                                class="form-control number fieldColor @error('estimated_budget') is-invalid @enderror"
+                                name="estimated_budget" value="{{ old('estimated_budget') }}" autocomplete="off" />
                             @error('estimated_budget')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -391,4 +393,5 @@
 <script src="{{ asset('assets/examples/js/forms/uploads.js') }}"></script>
 <script src="{{ asset('global/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('global/vendor/formatter/jquery.formatter.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
 @endpush

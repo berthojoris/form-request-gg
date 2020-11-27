@@ -15,13 +15,7 @@ class Tickethistory extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'uuid',
-        'ticket_id',
-        'status',
-        'note',
-        'document_upload',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be cast to native types.

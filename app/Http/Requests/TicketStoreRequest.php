@@ -24,28 +24,29 @@ class TicketStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'uuid' => ['required', 'string'],
-            'status' => ['required', 'in:OPEN,CLOSE'],
-            'project_id' => ['required', 'string'],
+            'uuid' => ['string'],
+            'project_id' => ['string'],
+            'status' => ['string'],
             'project_name' => ['required', 'string'],
-            'departemen_request' => ['required', 'string'],
-            'pic_request' => ['required', 'string'],
+            'departemen_request' => ['required'],
+            'pic_request' => ['required'],
             'email_submited' => ['required', 'email'],
             'user_destination' => ['required', 'integer', 'exists:users,id'],
             'digital_asset' => ['required', 'array'],
             'background' => ['required', 'string'],
             'objective' => ['required', 'string'],
             'target_audience' => ['required'],
-            'creatif_consideration' => ['required', 'string'],
-            'support_other_channel' => ['required', 'string'],
-            'kpi' => ['required', 'string'],
-            'requirement_rules' => ['required', 'string'],
-            'reference' => ['required', 'string'],
-            'project_brief' => ['file'],
-            'campaign_period_start' => ['required', 'date'],
-            'campaign_period_end' => ['required', 'date'],
+            'creative_consideration' => ['required', 'max:255'],
+            'support_other_channel' => ['required', 'max:255'],
+            'kpi' => ['required', 'max:255'],
+            'requirement_rules' => ['required', 'max:255'],
+            'reference' => ['required', 'max:255'],
+            'project_brief' => ['file', 'mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip'],
             'estimated_budget' => ['required', 'string'],
             'document_upload' => ['file'],
+            'start' => ['required'],
+            'end' => ['required'],
+            'estimated_budget' => ['string']
         ];
     }
 }

@@ -35,7 +35,7 @@ class CreateTicketsTable extends Migration
             $table->string('project_brief');
             $table->date('campaign_period_start');
             $table->date('campaign_period_end');
-            $table->double('estimated_budget', 12, 0);
+            $table->string('estimated_budget');
             $table->string('document_upload')->nullable();
             $table->softDeletes();
             $table->timestamps();

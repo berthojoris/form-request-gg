@@ -15,30 +15,7 @@ class Ticket extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'uuid',
-        'status',
-        'project_id',
-        'project_name',
-        'departemen_request',
-        'user_destination',
-        'username_submited',
-        'email_submited',
-        'digital_asset',
-        'background',
-        'objective',
-        'target_audience',
-        'creatif_consideration',
-        'support_other_channel',
-        'kpi',
-        'requirement_rules',
-        'reference',
-        'project_brief',
-        'campaign_period_start',
-        'campaign_period_end',
-        'estimated_budget',
-        'document_upload',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be cast to native types.
