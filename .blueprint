@@ -1,40 +1,10 @@
-created:
-    - app/Http/Controllers/FileuploadController.php
-    - app/Http/Controllers/TicketController.php
-    - app/Http/Controllers/TickethistoryController.php
-    - database/factories/FileuploadFactory.php
-    - database/factories/LogFactory.php
-    - database/factories/BrandFactory.php
-    - database/factories/InformationFactory.php
-    - database/factories/TicketFactory.php
-    - database/factories/TickethistoryFactory.php
-    - database/migrations/2020_11_26_093330_create_fileuploads_table.php
-    - database/migrations/2020_11_26_093331_create_logs_table.php
-    - database/migrations/2020_11_26_093332_create_brands_table.php
-    - database/migrations/2020_11_26_093333_create_information_table.php
-    - database/migrations/2020_11_26_093334_create_tickets_table.php
-    - database/migrations/2020_11_26_093335_create_tickethistories_table.php
-    - app/Models/Fileupload.php
-    - app/Models/Log.php
-    - app/Models/Brand.php
-    - app/Models/Information.php
-    - app/Models/Ticket.php
-    - app/Models/Tickethistory.php
-    - database/seeders/TicketSeeder.php
-    - database/seeders/TickethistorySeeder.php
-    - database/seeders/FileuploadSeeder.php
-    - database/seeders/LogSeeder.php
-    - database/seeders/BrandSeeder.php
-    - database/seeders/InformationSeeder.php
-    - tests/Feature/Http/Controllers/FileuploadControllerTest.php
-    - tests/Feature/Http/Controllers/TicketControllerTest.php
-    - tests/Feature/Http/Controllers/TickethistoryControllerTest.php
-updated:
-    - routes/web.php
+created: 'app/Http/Controllers/FileuploadController.php app/Http/Controllers/TicketController.php app/Http/Controllers/TickethistoryController.php database/factories/FileuploadFactory.php database/factories/LogFactory.php database/factories/BrandFactory.php database/factories/InformationFactory.php database/factories/TicketFactory.php database/factories/TickethistoryFactory.php database/migrations/2020_11_26_093330_create_fileuploads_table.php database/migrations/2020_11_26_093331_create_logs_table.php database/migrations/2020_11_26_093332_create_brands_table.php database/migrations/2020_11_26_093333_create_information_table.php database/migrations/2020_11_26_093334_create_tickets_table.php database/migrations/2020_11_26_093335_create_tickethistories_table.php app/Models/Fileupload.php app/Models/Log.php app/Models/Brand.php app/Models/Information.php app/Models/Ticket.php app/Models/Tickethistory.php database/seeders/TicketSeeder.php database/seeders/TickethistorySeeder.php database/seeders/FileuploadSeeder.php database/seeders/LogSeeder.php database/seeders/BrandSeeder.php database/seeders/InformationSeeder.php tests/Feature/Http/Controllers/FileuploadControllerTest.php tests/Feature/Http/Controllers/TicketControllerTest.php tests/Feature/Http/Controllers/TickethistoryControllerTest.php'
+updated: routes/web.php
 models:
-    Fileupload: { file_name: string, file_ext: string, file_size: string, file_saved_path: string, random_name: string, uploaded_by: 'id:User', timestamps: timestamps, softdeletes: softDeletes }
-    Log: { uuid: string, ip: string, full_url: string, controller_name: string, function_name: string, method_name: string, browser: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }
-    Brand: { name: string, brand_img: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }
-    Information: { uuid: uuid, title: string, slug: string, content: longtext, document_attached: 'string nullable', created_by: 'id:User', timestamps: timestamps, softdeletes: softDeletes }
-    Ticket: { uuid: string, status: 'enum:OPEN,CLOSE', project_id: string, project_name: string, departemen_request: string, user_destination: 'id:user', username_submited: string, email_submited: string, digital_asset: string, background: text, objective: text, target_audience: string, creatif_consideration: text, support_other_channel: string, kpi: string, requirement_rules: string, reference: string, project_brief: string, campaign_period_start: date, campaign_period_end: date, estimated_budget: 'double:12,0', document_upload: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }
-    Tickethistory: { uuid: string, ticket_id: 'id:Ticket', status: 'enum:ACCEPTED,ON_PROGRESS,PENDING,CANCELED,DONE', note: text, document_upload: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }
+    Models\Brand: { name: string, brand_img: 'string nullable' }
+    Models\Fileupload: { file_name: string, file_ext: string, file_size: string, file_saved_path: string, random_name: string, uploaded_by: 'biginteger unsigned' }
+    Models\Information: { uuid: 'string:36', title: string, slug: string, content: text, document_attached: 'string nullable', created_by: 'biginteger unsigned' }
+    Models\Log: { uuid: string, ip: string, full_url: string, controller_name: string, function_name: string, method_name: string, browser: 'string nullable' }
+    Models\Ticket: { uuid: string, status: enum, project_id: string, project_name: string, departemen_request: string, pic_request: string, user_destination: 'biginteger unsigned', email_submited: string, digital_asset: string, background: text, objective: text, target_audience: string, creative_consideration: text, support_other_channel: string, kpi: string, requirement_rules: string, reference: string, project_brief: string, campaign_period_start: date, campaign_period_end: date, estimated_budget: 'string:50 default:0', document_upload: 'string nullable' }
+    Models\Tickethistory: { uuid: string, ticket_id: 'biginteger unsigned', status: enum, note: text, document_upload: 'string nullable' }
+    Models\User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
