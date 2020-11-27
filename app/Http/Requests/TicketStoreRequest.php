@@ -46,7 +46,8 @@ class TicketStoreRequest extends FormRequest
             'document_upload' => ['file'],
             'start' => ['required'],
             'end' => ['required'],
-            'document_upload' => ['file', 'mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip']
+            'document_upload' => ['file', 'mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip'],
+            'input_city' => ['required_if:target_audience,Input Your City']
         ];
     }
 }

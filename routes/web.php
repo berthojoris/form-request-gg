@@ -13,16 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TicketController@index')->name('ticket_index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'ticket'], function () {
-    Route::get('/', 'TicketController@index')->name('ticket_index');
     Route::post('/store', 'TicketController@store')->name('ticket_store');
 });
 

@@ -166,9 +166,9 @@
                             </div>
                         </div>
                         @error('digital_asset')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                        <small style="display: inline;" class="invalid-feedback offset-md-4"
+                            data-fv-validator="notEmpty" data-fv-for="porto_is"
+                            data-fv-result="INVALID">{{ $message }}</small>
                         @enderror
                     </div>
 
@@ -202,22 +202,37 @@
 
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Target Audience<span
-                                class="required">*</span></label>
+                                class="required">*</span>
+                        </label>
                         <div class="col-md-6 @error('target_audience') is-invalid @enderror">
                             <div class="radio-custom checkbox-primary">
                                 <input type="radio" name="target_audience" value="National Wide">
                                 <label for="target_audience">National Wide</label>
                             </div>
                             <div class="radio-custom checkbox-primary">
-                                <input type="radio" name="target_audience" value="Input Your City">
-                                <label for="target_audience">Input Your City</label>
+                                <input type="radio" name="target_audience" value="Selected City">
+                                <label for="target_audience">Selected City</label>
                             </div>
+                            @error('target_audience')
+                            <small style="display: inline;" class="invalid-feedback" data-fv-validator="notEmpty"
+                                data-fv-for="porto_is" data-fv-result="INVALID">{{ $message }}</small>
+                            @enderror
                         </div>
-                        @error('target_audience')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                    </div>
+
+                    <div id="hideShow" class="form-group row hidePanel">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Selected City<span
+                                class="required">*</span></label>
+                        <div class="col-md-6">
+                            <input id="input_city" type="text"
+                                class="form-control fieldColor @error('input_city') is-invalid @enderror"
+                                name="input_city" value="{{ old('input_city') }}" autocomplete="off">
+                            @error('input_city')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -338,10 +353,9 @@
                                     <input type="text" class="form-control" name="end" />
                                 </div>
                             </div>
-                            @error('campaign_period_start')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('start')
+                            <small style="display: inline;" class="invalid-feedback" data-fv-validator="notEmpty"
+                                data-fv-for="porto_is" data-fv-result="INVALID">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -384,6 +398,9 @@
 <link rel="stylesheet" href="{{ asset('global/vendor/blueimp-file-upload/jquery.fileupload.css') }}">
 <link rel="stylesheet" href="{{ asset('global/vendor/dropify/dropify.css') }}">
 <link rel="stylesheet" href="{{asset('assets/css/ticket.css')}}" />
+<link rel="stylesheet" href="{{ asset('global/vendor/formvalidation/formValidation.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/examples/css/forms/validation.css') }}">
+<link rel="stylesheet" href="{{asset('css/ticket.css')}}" />
 @endpush
 
 @push('custom_js')
@@ -405,4 +422,7 @@
 <script src="{{ asset('global/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('global/vendor/formatter/jquery.formatter.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('global/vendor/formvalidation/formValidation.min.js') }}"></script>
+<script src="{{ asset('global/vendor/formvalidation/framework/bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/ticket.js') }}"></script>
 @endpush
