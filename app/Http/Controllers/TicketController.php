@@ -57,16 +57,15 @@ class TicketController extends Controller
     public function store(TicketStoreRequest $request)
     {
 
-        $pb = $request->file('project_brief');
-        $du = $request->file('document_upload');
-
-        if (!empty($du)) {
+        if ($request->hasFile('project_brief')) {
+            $pb = $request->file('project_brief');
             $newFileName = Str::random(20) . "." . $pb->getClientOriginalExtension();
         } else {
             $newFileName = "empty.jpg";
         }
 
-        if (!empty($du)) {
+        if ($request->hasFile('document_upload')) {
+            $du = $request->file('document_upload');
             $documentUpload = Str::random(20) . "." . $du->getClientOriginalExtension();
         } else {
             $documentUpload = "empty.jpg";
