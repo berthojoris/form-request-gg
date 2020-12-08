@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
 
 Route::get('/', 'TicketController@index')->name('ticket_index');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 

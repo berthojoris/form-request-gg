@@ -55,8 +55,8 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    @include('partials.navbar')
-    @include('partials.side_menu_bar')
+    @include('partials.navbar_account')
+    @include('partials.side_menu_bar_account')
     @include('partials.grid_menu')
 
     <div class="page">
@@ -104,6 +104,16 @@
     <script src="{{ asset('global/js/Plugin/switchery.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/jquery-placeholder.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/input-group-file.js') }}"></script>
+    <style>
+    .site-menubar-body {
+        height: 100%;
+    }
+
+    scrollable-container {
+        height: 100%;
+        width: 277px;
+    }
+    </style>
 
     <script>
         (function(document, window, $){
