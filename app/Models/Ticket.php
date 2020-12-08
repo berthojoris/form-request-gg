@@ -41,6 +41,6 @@ class Ticket extends Model
 
     public function userDestination()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\User::class, 'user_destination', 'id');
     }
 }

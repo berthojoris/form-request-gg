@@ -17,11 +17,28 @@ jQuery(function() {
             {
                 data: 'status',
                 render: function(data, type, row) {
-                    return "<span class='badge badge-info'>" + data + "</span>";
+                    if (data == 'CLOSE') {
+                        return "<span class='badge badge-danger badge-lg'>" + data + "</span>";
+                    } else {
+                        return "<span class='badge badge-info badge-lg'>" + data + "</span>";
+                    }
                 }
             },
             {
                 data: 'project_id'
+            },
+            {
+                data: 'project_name'
+            },
+            {
+                data: 'departemen_request'
+            },
+            {
+                data: 'pic_request'
+            },
+            {
+                data: 'userDestination',
+                name: 'userDestination.name',
             }
         ]
     });
