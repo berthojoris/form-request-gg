@@ -140,4 +140,15 @@ class TicketController extends Controller
 
         return redirect()->route('ticket.index');
     }
+
+    public function formRequest()
+    {
+        return view('admin.ticket');
+    }
+
+    public function listTikectData()
+    {
+        $model = Ticket::with(['userDestination']);
+        return datatables()->eloquent($model)->toJson();
+    }
 }

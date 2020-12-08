@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('global/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/css/bootstrap-extend.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/loading.css') }}">
 
     <!-- Plugins -->
     <link rel="stylesheet" href="{{ asset('global/vendor/animsition/animsition.css') }}">
@@ -33,6 +34,7 @@
     <link rel="stylesheet" href="{{ asset('global/fonts/web-icons/web-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/fonts/brand-icons/brand-icons.min.css') }}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    @stack('externalCSS')
 
     <!--[if lt IE 9]>
     <script src="{{ asset('global/vendor/html5shiv/html5shiv.min.js') }}"></script>
@@ -48,9 +50,12 @@
     <script>
         Breakpoints();
     </script>
+    <script>
+        var baseURL = '{{ env('APP_URL') }}';
+    </script>
 </head>
 
-<body class="animsition">
+<body class="animsition @stack('body-class')">
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -78,7 +83,7 @@
     <script src="{{ asset('global/vendor/intro-js/intro.js') }}"></script>
     <script src="{{ asset('global/vendor/screenfull/screenfull.js') }}"></script>
     <script src="{{ asset('global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
-    <script src="{{ asset('global/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
+    @stack('pluginJS')
 
     <!-- Scripts -->
     <script src="{{ asset('global/js/Component.js') }}"></script>
@@ -102,8 +107,7 @@
     <script src="{{ asset('global/js/Plugin/asscrollable.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/slidepanel.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/switchery.js') }}"></script>
-    <script src="{{ asset('global/js/Plugin/jquery-placeholder.js') }}"></script>
-    <script src="{{ asset('global/js/Plugin/input-group-file.js') }}"></script>
+    @stack('pageJS')
     <style>
     .site-menubar-body {
         height: 100%;
