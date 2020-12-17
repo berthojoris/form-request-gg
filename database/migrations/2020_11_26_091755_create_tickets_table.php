@@ -27,7 +27,7 @@ class CreateTicketsTable extends Migration
             $table->text('background');
             $table->text('objective');
             $table->string('target_audience');
-            $table->text('creatif_consideration');
+            $table->text('creative_consideration');
             $table->string('support_other_channel');
             $table->string('kpi');
             $table->string('requirement_rules');

@@ -36,7 +36,7 @@ class TicketFactory extends Factory
             'background' => $this->faker->text,
             'objective' => $this->faker->text,
             'target_audience' => $this->faker->word,
-            'creatif_consideration' => $this->faker->text,
+            'creative_consideration' => $this->faker->text,
             'support_other_channel' => $this->faker->word,
             'kpi' => $this->faker->word,
             'requirement_rules' => $this->faker->word,

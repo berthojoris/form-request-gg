@@ -29,30 +29,16 @@ class TicketController extends Controller
         return view('ticket.index', compact('tickets', 'accountDigital'));
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Ticket $ticket
-     * @return \Illuminate\Http\Response
-     */
     public function show(Request $request, Ticket $ticket)
     {
         return view('ticket.show', compact('ticket'));
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Ticket $ticket
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, Ticket $ticket)
     {
         return view('ticket.edit', compact('tickets'));
     }
 
-    /**
-     * @param \App\Http\Requests\TicketStoreRequest $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(TicketStoreRequest $request)
     {
 
@@ -110,11 +96,6 @@ class TicketController extends Controller
         return redirect()->route('ticket_index');
     }
 
-    /**
-     * @param \App\Http\Requests\TicketUpdateRequest $request
-     * @param \App\Models\Ticket $ticket
-     * @return \Illuminate\Http\Response
-     */
     public function update(TicketUpdateRequest $request, Ticket $ticket)
     {
         $ticket->update($request->validated());
@@ -128,11 +109,6 @@ class TicketController extends Controller
         return redirect()->route('ticket.index');
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Ticket $ticket
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, Ticket $ticket)
     {
         $ticket->delete();
