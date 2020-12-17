@@ -20,10 +20,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tickethistory', 'TickethistoryController@index')->name('upload_index');
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::get('/form-request', 'TicketController@formRequest')->name('formRequest');
-    Route::get('/add-user', 'TicketController@formRequest')->name('formRequest');
+    Route::get('/user-manage', 'UserController@index')->name('userManage');
 
     // JSON DATA
     Route::group(['prefix' => 'data'], function () {
         Route::get('/ticket', 'TicketController@listTikectData')->name('data_ticket');
+        Route::get('/user', 'UserController@userData')->name('user_data');
+        Route::post('/user-store', 'UserController@store')->name('userStore');
     });
 });

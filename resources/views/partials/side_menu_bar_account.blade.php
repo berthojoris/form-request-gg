@@ -23,6 +23,12 @@
                             <span class="site-menu-title">Form Requests</span>
                         </a>
                     </li>
+                    <li class="site-menu-item {{ (request()->is('user-manage')) ? 'active' : '' }}">
+                        <a href="{{ route('userManage') }}">
+                            <i class="site-menu-icon wb-order" aria-hidden="true"></i>
+                            <span class="site-menu-title">User</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

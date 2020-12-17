@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('global/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/css/bootstrap-extend.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('global/vendor/bootstrap-sweetalert/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('global/vendor/toastr/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/loading.css') }}">
 
     <!-- Plugins -->
@@ -52,6 +54,17 @@
     </script>
     <script>
         var baseURL = '{{ env('APP_URL') }}';
+        function successMsg(title, text, type) {
+            swal({
+                title: title,
+                text: text,
+                type: type,
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: 'OK',
+                closeOnConfirm: false
+            });
+        }
     </script>
 </head>
 
@@ -107,6 +120,9 @@
     <script src="{{ asset('global/js/Plugin/asscrollable.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/slidepanel.js') }}"></script>
     <script src="{{ asset('global/js/Plugin/switchery.js') }}"></script>
+    <script src="{{ asset('global/vendor/bootstrap-sweetalert/sweetalert.js') }}"></script>
+    <script src="{{ asset('global/vendor/toastr/toastr.js') }}"></script>
+
     @stack('pageJS')
     <style>
     .site-menubar-body {
