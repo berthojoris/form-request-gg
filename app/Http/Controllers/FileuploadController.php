@@ -43,4 +43,9 @@ class FileuploadController extends Controller
 
         return redirect()->route('fileupload.index');
     }
+
+    public function downloadFile($filename)
+    {
+        dd($filename);
+    }
 }

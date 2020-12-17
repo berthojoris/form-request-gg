@@ -23,8 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
-        User::create([
+        $bertho = User::create([
             'name' => 'Bertho',
             'email' => 'berthojoris@gmail.com',
             'email_verified_at' => now(),
@@ -32,11 +31,31 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        Role::create(['name' => 'Admin']);
+        $tania = User::create([
+            'name' => 'Tania',
+            'email' => 'tania@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$fOTiv8l.DR8hBOrSJhU92OrQ8bTbUeb9YYGyOoOid0m5WlX8olPCW', // malaquena
+            'remember_token' => Str::random(10),
+        ]);
+
+        $bagus = User::create([
+            'name' => 'Bagus',
+            'email' => 'bagus@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$fOTiv8l.DR8hBOrSJhU92OrQ8bTbUeb9YYGyOoOid0m5WlX8olPCW', // malaquena
+            'remember_token' => Str::random(10),
+        ]);
+
+        $admin = Role::create(['name' => 'Admin']);
         Role::create(['name' => 'Monitoring']);
-        Role::create(['name' => 'Digital Account']);
+        $digitalAccount = Role::create(['name' => 'Digital Account']);
         Role::create(['name' => 'Brand Team']);
         Role::create(['name' => 'General']);
+
+        $bertho->assignRole($admin);
+        $tania->assignRole($digitalAccount);
+        $bagus->assignRole($digitalAccount);
 
         Permission::create(['name' => 'list ticketrequest']);
         Permission::create(['name' => 'add ticketrequest']);
@@ -71,5 +90,10 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'add information']);
         Permission::create(['name' => 'edit information']);
         Permission::create(['name' => 'delete information']);
+
+        $allPermission = Permission::all();
+        $admin->syncPermissions($allPermission);
+
+        Ticket::factory(10)->create();
     }
 }

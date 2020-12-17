@@ -123,12 +123,17 @@ class TicketController extends Controller
 
     public function listTikectData()
     {
-        $model = Ticket::with(['userDestination' => function ($query) {
+        $model = Ticket::forme()->with(['userDestination' => function ($query) {
             $query->select('id', 'name', 'email');
         }]);
 
         return datatables()->eloquent($model)->addColumn('userDestination', function (Ticket $ticket) {
             return $ticket->userDestination->name;
         })->toJson();
+    }
+
+    public function detailTicket($request)
+    {
+        return Ticket::where('project_id', $request)->firstOrFail();
     }
 }

@@ -16,10 +16,30 @@
                 </li>
                 <li>
                     <a href="{{ route('formRequest') }}">
-                        <i class="icon wb-order"></i>
+                        <i class="icon wb-copy"></i>
                         <span>Form Requests</span>
                     </a>
                 </li>
+                @role('Admin')
+                <li>
+                    <a href="{{ route('formRequest') }}">
+                        <i class="icon wb-order"></i>
+                        <span>Roles</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('formRequest') }}">
+                        <i class="icon wb-order"></i>
+                        <span>Permission</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('formRequest') }}">
+                        <i class="icon wb-order"></i>
+                        <span>User</span>
+                    </a>
+                </li>
+                @endrole
             </ul>
         </div>
     </div>

@@ -43,4 +43,13 @@ class Ticket extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'user_destination', 'id');
     }
+
+    public function scopeForme($query)
+    {
+        if(myid() == 1) {
+            return $query;
+        } else {
+            return $query->where('user_destination', myid());
+        }
+    }
 }

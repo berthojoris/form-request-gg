@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/permissions', 'PermissionController@index')->name('permissions');
     Route::post('/permissions/create', 'PermissionController@create')->name('permission_roles');
 
+    Route::get('/document/download/{filename}', 'FileuploadController@downloadFile')->name('downloadFile');
+
 
     // JSON DATA
     Route::group(['prefix' => 'data'], function () {
@@ -39,5 +41,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/user-store', 'UserController@store')->name('userStore');
         Route::get('/roles', 'RoleController@data')->name('roleData');
         Route::get('/permissions', 'PermissionController@data')->name('permissionData');
+        Route::get('/ticket/{projectId}/detail', 'TicketController@detailTicket')->name('detailTicket');
     });
 });

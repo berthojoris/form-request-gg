@@ -26,7 +26,7 @@ jQuery(function() {
                     if (data === null) {
                         return "<span class='badge badge-danger badge badgeCustom'>Not verified yet</span>"
                     } else {
-                        return "<span class='badge badge-info badge badgeCustom'>" + moment(data).startOf('day').fromNow() + "</span>"
+                        return "<span class='badge badge-info badge-lg'>" + moment(data).format("MMM Do YY") + "</span>"
                     }
                 }
             },

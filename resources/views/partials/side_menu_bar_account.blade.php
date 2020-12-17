@@ -16,6 +16,7 @@
                             <span class="site-menu-title">Profile</span>
                         </a>
                     </li>
+                    @role('Admin')
                     <li class="site-menu-category">Administrator</li>
                     <li class="site-menu-item {{ (request()->is('roles')) ? 'active' : '' }}">
                         <a href="{{ route('roles') }}">
@@ -29,17 +30,18 @@
                             <span class="site-menu-title">Permissions</span>
                         </a>
                     </li>
-                    <li class="site-menu-category">Data</li>
-                    <li class="site-menu-item {{ (request()->is('form-request')) ? 'active' : '' }}">
-                        <a href="{{ route('formRequest') }}">
-                            <i class="site-menu-icon wb-order" aria-hidden="true"></i>
-                            <span class="site-menu-title">Form Requests</span>
-                        </a>
-                    </li>
                     <li class="site-menu-item {{ (request()->is('user-manage')) ? 'active' : '' }}">
                         <a href="{{ route('userManage') }}">
                             <i class="site-menu-icon wb-order" aria-hidden="true"></i>
                             <span class="site-menu-title">User</span>
+                        </a>
+                    </li>
+                    @endrole
+                    <li class="site-menu-category">Request</li>
+                    <li class="site-menu-item {{ (request()->is('form-request')) ? 'active' : '' }}">
+                        <a href="{{ route('formRequest') }}">
+                            <i class="site-menu-icon wb-copy" aria-hidden="true"></i>
+                            <span class="site-menu-title">Form Requests</span>
                         </a>
                     </li>
                 </ul>

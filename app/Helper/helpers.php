@@ -64,3 +64,10 @@ if (!function_exists('jsonOutput')) {
         ], $httpCode);
     }
 }
+
+if (!function_exists('myid')) {
+    function myid()
+    {
+        return auth()->user()->id;
+    }
+}

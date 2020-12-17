@@ -18,8 +18,8 @@ class TicketObserver
     {
         $ticket->uuid = Str::uuid();
         $ticket->status = 'OPEN';
-        $ticket->project_id = session('projectid');
-        $ticket->estimated_budget = Str::of(request('estimated_budget'))->replace(',', '');
+        // $ticket->project_id = session('projectid');
+        // $ticket->estimated_budget = Str::of(request('estimated_budget'))->replace(',', '');
     }
 
     public function created(Ticket $ticket)
