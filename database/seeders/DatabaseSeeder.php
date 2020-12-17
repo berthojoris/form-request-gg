@@ -22,12 +22,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(10)->create();
-        // Brand::factory(10)->create();
-        // Fileupload::factory(10)->create();
-        // Log::factory(10)->create();
-        // Information::factory(10)->create();
-        // Ticket::factory(10)->create();
-        // Tickethistory::factory(10)->create();
         User::create([
             'name' => 'Bertho',
             'email' => 'berthojoris@gmail.com',

@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::get('/form-request', 'TicketController@formRequest')->name('formRequest');
     Route::get('/user-manage', 'UserController@index')->name('userManage');
+    Route::get('/user-manage/edit/{user}', 'UserController@edit')->name('userEdit');
+    Route::post('/user-manage/update', 'UserController@update')->name('userUpdate');
+    Route::get('/user-manage/delete/{user}', 'UserController@destroy')->name('userDestroy');
 
     // JSON DATA
     Route::group(['prefix' => 'data'], function () {

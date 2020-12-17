@@ -1,5 +1,5 @@
 jQuery(function() {
-    $('#tbl_user').DataTable({
+    var table = $('#tbl_user').DataTable({
         processing: true,
         serverSide: true,
         ajax: baseURL + '/data/user',
@@ -19,21 +19,55 @@ jQuery(function() {
             },
             {
                 data: 'email'
-            }
+            },
+            {
+                data: 'email_verified_at',
+                render: function(data, type, row) {
+                    if (data === null) {
+                        return "<span class='badge badge-danger badge badgeCustom'>Not verified yet</span>"
+                    } else {
+                        return "<span class='badge badge-info badge badgeCustom'>" + moment(data).startOf('day').fromNow() + "</span>"
+                    }
+                }
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
         ]
-    });
+    })
+
+    table.on('click', '.editBtn', function(e) {
+        e.preventDefault();
+        $tr = $(this).closest('tr')
+        var data = table.row($tr).data()
+        showData(data.id)
+    })
+
 
     $('#formAddUser').on('shown.bs.modal', function() {
         reset()
     })
 
+    $('#formAddUser').on('hide.bs.modal', function() {
+        reset()
+        $('.invalid-feedback').empty()
+        $('.invalid-feedback').hide()
+    })
 
+    $('#formUpdateUser').on('hide.bs.modal', function() {
+        reset()
+        $('.invalid-feedback').empty()
+        $('.invalid-feedback').hide()
+    })
 })
 
 $('#btnCreate').on('click', function(e) {
     e.preventDefault();
-    $(this).addClass('d-none')
-    $("#loader").removeClass('d-none')
+    $(this).addClass('hidden-xxl-down')
+    $("#loader").removeClass('hidden-xxl-down')
     $('.invalid-feedback').empty()
     $('.invalid-feedback').hide()
 
@@ -45,46 +79,112 @@ $('#btnCreate').on('click', function(e) {
 
     $.ajax({
         type: "POST",
-        url: baseURL + '/data/user-store',
+        url: route('userStore'),
         data: $('#formUserRegistration').serialize(),
         dataType: "json",
         success: function(response) {
-            resetCloseModal()
-            successMsg("Notify", "User Created", "success")
+            $('#formAddUser').modal('hide')
+            $('#tbl_user').DataTable().ajax.reload();
+            showMsg("Notification", response.msg, "success")
         },
         error: function(err) {
-            if (err.status == 422) { // when status code is 422, it's a validation issue
-                validationError()
+            validationError()
+            if (err.status === 422) {
                 $('.invalid-feedback').show()
-                console.log(err.responseJSON);
-
-                // you can loop through the errors object and show it to the user
-                console.warn(err.responseJSON.errors);
-                // display errors on each form field
-                $.each(err.responseJSON.errors, function(i, error) {
-                    var el = $(document).find('[name="' + i + '"]');
-                    console.log(el.parent().next().html("<strong>" + error[0] + "</strong>"));
+                var errors = $.parseJSON(err.responseText)
+                $.each(errors.errors, function(key, val) {
+                    $("#" + key + "_error").html(val[0])
                 });
+            } else if (err.status === 404) {
+                showMsg("Notification", "Data not found" + err.status, "error")
+            } else {
+                showMsg("Notification", "Something wrong. Error code " + err.status, "error")
             }
         }
     });
 });
 
 function validationError() {
-    $("#btnCreate").removeClass('d-none')
-    $("#loader").addClass('d-none')
+    $("#btnCreate").removeClass('hidden-xxl-down')
+    $("#loader").addClass('hidden-xxl-down')
 }
 
 function reset() {
     $('#formUserRegistration')[0].reset()
-    $("#btnCreate").removeClass('d-none')
-    $("#loader").addClass('d-none')
+    $('#formUpdateUserRegistrasi')[0].reset()
+    $("#btnCreate").removeClass('hidden-xxl-down')
+    $("#btnUpdate").removeClass('hidden-xxl-down')
+    $("#loader").addClass('hidden-xxl-down')
+    $("#loaderUpdate").addClass('hidden-xxl-down')
     $('#name').focus()
 }
 
-function resetCloseModal() {
-    $('#formUserRegistration')[0].reset()
-    $("#btnCreate").removeClass('d-none')
-    $("#loader").addClass('d-none')
-    $('#formAddUser').modal('hide')
+function showData(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: route('userEdit', id),
+        data: $('#formUserRegistration').serialize(),
+        dataType: "json",
+        success: function(response) {
+            $("#update_id").val(response.data.id)
+            $("#update_name").val(response.data.name)
+            $("#update_email").val(response.data.email)
+            $("#update_password").val('')
+            $('#formUpdateUser').modal({ backdrop: 'static', keyboard: false })
+        },
+        error: function(err) {
+            if (err.status === 422) {
+                //
+            } else {
+                showMsg("Notification", "Something wrong. Error code " + err.status, "error")
+            }
+        }
+    })
 }
+
+$('#btnUpdate').on('click', function(e) {
+    e.preventDefault();
+    $(this).addClass('hidden-xxl-down')
+    $("#loaderUpdate").removeClass('hidden-xxl-down')
+    $('.invalid-feedback').empty()
+    $('.invalid-feedback').hide()
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        url: route('userUpdate'),
+        data: $('#formUpdateUserRegistrasi').serialize(),
+        dataType: "json",
+        success: function(response) {
+            $('#formUpdateUser').modal('hide')
+            $('#tbl_user').DataTable().ajax.reload();
+            showMsg("Notification", response.msg, "success")
+        },
+        error: function(err) {
+            $('#btnUpdate').removeClass('hidden-xxl-down')
+            $("#loaderUpdate").addClass('hidden-xxl-down')
+            if (err.status === 422) {
+                $('.invalid-feedback').show()
+                var errors = $.parseJSON(err.responseText)
+                $.each(errors.errors, function(key, val) {
+                    $("#" + key + "_error").html(val[0])
+                });
+            } else if (err.status === 404) {
+                showMsg("Notification", "Data not found" + err.status, "error")
+            } else {
+                showMsg("Notification", "Something wrong. Error code " + err.status, "error")
+            }
+        }
+    });
+})

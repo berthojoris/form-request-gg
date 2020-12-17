@@ -54,3 +54,13 @@ if (!function_exists('uploadFile')) {
         }
     }
 }
+
+if (!function_exists('jsonOutput')) {
+    function jsonOutput($msg = null, $payload = null, $httpCode = 200)
+    {
+        return response()->json([
+            'msg' => $msg,
+            'data' => $payload,
+        ], $httpCode);
+    }
+}

@@ -229,3 +229,8 @@
         opacity: 0.2;
     }
 }
+
+.badgeCustom {
+    padding: 7px;
+    font-size: 12px;
+}
