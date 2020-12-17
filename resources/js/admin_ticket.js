@@ -83,6 +83,9 @@ jQuery(function() {
 
 
     $('#modal_detail_request').on('hide.bs.modal', function() {
+        $("#upFile").val('')
+        $("#note").val('')
         $('[href="#tabDetailRequest"]').tab('show')
+        $("select#status").prop('selectedIndex', 0)
     })
 })

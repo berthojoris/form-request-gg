@@ -129,8 +129,75 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div class="tab-pane" id="tabHistoryRequest" role="tabpanel"></div>
-                                    <div class="tab-pane" id="tabAddHistory" role="tabpanel"></div>
+
+
+                                    <div class="tab-pane" id="tabHistoryRequest" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-12 col-xl-12">
+                                                <div class="example-wrap">
+                                                    <div class="list-group">
+                                                        <a class="list-group-item flex-column align-items-start" href="javascript:void(0)">
+                                                            <h4 class="list-group-item-heading mt-0 mb-5">Status : <b><span class="badge badge-info badge-lg">Pending</span></b></h4>
+                                                            <p class="mb-0">Penjelasannya disini ya gaes</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab-pane" id="tabAddHistory" role="tabpanel">
+                                        <div class="row">
+                                            <form action="#" method="post">
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="example-wrap">
+                                                        <h4 class="example-title">Add History</h4>
+                                                        <p>You data can be monitoring on history request tab tab.</p>
+                                                        <input type="hidden" name="ticket_id" id="ticket_id">
+                                                        <div class="form-group">
+                                                            <label>Status</label>
+                                                            <div class="input-group">
+                                                                <select class="form-control" name="status" id="status">
+                                                                    <option value="ACCEPTED">ACCEPTED</option>
+                                                                    <option value="ON_PROGRESS">ON PROGRESS</option>
+                                                                    <option value="PENDING">PENDING</option>
+                                                                    <option value="CANCELED">CANCELED</option>
+                                                                    <option value="DONE">DONE</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Note</label>
+                                                            <div class="input-group">
+                                                                <textarea class="form-control" name="note" id="note" rows="5"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Dokumen Upload</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                                    <input type="text" class="form-control" readonly="" id="upFile" />
+                                                                    <span class="input-group-btn">
+                                                                        <span class="btn btn-success btn-file">
+                                                                            <i class="icon wb-upload" aria-hidden="true"></i>
+                                                                            <input type="file" name="document_upload" id="document_upload" multiple="" />
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -158,8 +225,11 @@
 <script src="{{ asset('global/js/Plugin/closeable-tabs.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="{{ asset('js/number.min.js') }}"></script>
+<script src="{{ asset('global/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
 @endpush
 
 @push('pageJS')
+<script src="{{ asset('global/js/Plugin/jquery-placeholder.js') }}"></script>
+<script src="{{ asset('global/js/Plugin/input-group-file.js') }}"></script>
 <script src="{{ asset('js/admin_ticket.js') }}"></script>
 @endpush
