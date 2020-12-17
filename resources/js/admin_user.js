@@ -46,6 +46,13 @@ jQuery(function() {
         showData(data.id)
     })
 
+    table.on('click', '.deleteBtn', function(e) {
+        e.preventDefault();
+        $tr = $(this).closest('tr')
+        var data = table.row($tr).data()
+        deleteData(data.id)
+    })
+
 
     $('#formAddUser').on('shown.bs.modal', function() {
         reset()
@@ -119,6 +126,30 @@ function reset() {
     $('#name').focus()
 }
 
+function deleteData(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: route('userDestroy', id),
+        success: function(response) {
+            $('#tbl_user').DataTable().ajax.reload()
+            showMsg("Notification", response.msg, "success")
+        },
+        error: function(err) {
+            if (err.status === 422) {
+                //
+            } else {
+                showMsg("Notification", "Something wrong. Error code " + err.status, "error")
+            }
+        }
+    })
+}
+
 function showData(id) {
     $.ajaxSetup({
         headers: {
@@ -168,7 +199,7 @@ $('#btnUpdate').on('click', function(e) {
         dataType: "json",
         success: function(response) {
             $('#formUpdateUser').modal('hide')
-            $('#tbl_user').DataTable().ajax.reload();
+            $('#tbl_user').DataTable().ajax.reload()
             showMsg("Notification", response.msg, "success")
         },
         error: function(err) {
