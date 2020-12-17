@@ -1,4 +1,6 @@
 {
+    "/js/admin_permission.js": "/js/admin_permission.js",
+    "/js/admin_role.js": "/js/admin_role.js",
     "/js/admin_ticket.js": "/js/admin_ticket.js",
     "/js/admin_user.js": "/js/admin_user.js",
     "/js/ticket.js": "/js/ticket.js",

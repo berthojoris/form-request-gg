@@ -91,6 +91,7 @@
     <script src="{{ asset('global/vendor/asscrollbar/jquery-asScrollbar.js') }}"></script>
     <script src="{{ asset('global/vendor/asscrollable/jquery-asScrollable.js') }}"></script>
     <script src="{{ asset('global/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 
     <!-- Plugins -->
     <script src="{{ asset('global/vendor/switchery/switchery.js') }}"></script>
@@ -123,6 +124,10 @@
     <script src="{{ asset('global/js/Plugin/switchery.js') }}"></script>
     <script src="{{ asset('global/vendor/bootstrap-sweetalert/sweetalert.js') }}"></script>
     <script src="{{ asset('global/vendor/toastr/toastr.js') }}"></script>
+
+    <script>
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+    </script>
 
     @stack('pageJS')
     <style>

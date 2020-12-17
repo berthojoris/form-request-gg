@@ -14,6 +14,8 @@ const mix = require('laravel-mix');
 mix.js('resources/js/ticket.js', 'public/js')
     .js('resources/js/admin_ticket.js', 'public/js')
     .js('resources/js/admin_user.js', 'public/js')
+    .js('resources/js/admin_role.js', 'public/js')
+    .js('resources/js/admin_permission.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
         'resources/css/ticket.css',

@@ -47,6 +47,5 @@ jQuery(function() {
 
     $('#tbl_ticket').on('click', 'tr', function() {
         var projectID = $('td', this).eq(1).text();
-        alert(projectID)
     });
 })

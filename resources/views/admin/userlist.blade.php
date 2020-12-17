@@ -36,7 +36,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="exampleFormModalLabel">Create new user</h4>
+                <h4 class="modal-title" id="exampleFormModalLabel">Create User</h4>
                 <input type="hidden" name="form_type" value="create">
             </div>
             <div class="modal-body">
@@ -48,7 +48,7 @@
                             </span>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Name" autocomplete="off" />
                         </div>
-                        <span class="invalid-feedback" role="alert" id="name_error">Error</span>
+                        <span class="invalid-feedback" role="alert" id="name_error"></span>
                     </div>
                     <div class="col-xl-12 form-group">
                         <div class="input-group input-group-icon">

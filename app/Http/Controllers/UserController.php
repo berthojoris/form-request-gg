@@ -12,7 +12,6 @@ class UserController extends Controller
 
     public function userData()
     {
-        // return datatables()->of(User::query())->toJson();
         $data = User::select('*');
         return Datatables::of($data)
             ->addIndexColumn()

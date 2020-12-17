@@ -2,7 +2,7 @@ jQuery(function() {
     var table = $('#tbl_user').DataTable({
         processing: true,
         serverSide: true,
-        ajax: baseURL + '/data/user',
+        ajax: route('user_data'),
         order: [
             [0, "desc"]
         ],
@@ -78,12 +78,6 @@ $('#btnCreate').on('click', function(e) {
     $('.invalid-feedback').empty()
     $('.invalid-feedback').hide()
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
     $.ajax({
         type: "POST",
         url: route('userStore'),
@@ -127,11 +121,6 @@ function reset() {
 }
 
 function deleteData(id) {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
     $.ajax({
         type: "GET",
@@ -151,11 +140,6 @@ function deleteData(id) {
 }
 
 function showData(id) {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
     $.ajax({
         type: "GET",
@@ -185,12 +169,6 @@ $('#btnUpdate').on('click', function(e) {
     $("#loaderUpdate").removeClass('hidden-xxl-down')
     $('.invalid-feedback').empty()
     $('.invalid-feedback').hide()
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
     $.ajax({
         type: "POST",
