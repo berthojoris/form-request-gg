@@ -57,7 +57,7 @@ jQuery(function() {
                 $("#req_project_name").html(response.project_name)
                 $("#req_departmen_request").html(response.departemen_request)
                 $("#req_pic_request").html(response.pic_request)
-                $("#req_pic_target").html(response.user_destination)
+                $("#req_pic_target").html(response.user_destination.name)
                 $("#req_email").html(response.email_submited)
                 $("#req_digital_assets").html(response.digital_asset)
                 $("#req_background").html(response.background)

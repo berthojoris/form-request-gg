@@ -134,6 +134,7 @@ class TicketController extends Controller
 
     public function detailTicket($request)
     {
-        return Ticket::where('project_id', $request)->firstOrFail();
+        $data = Ticket::with('userDestination')->where('project_id', $request)->firstOrFail();
+        return $data;
     }
 }
