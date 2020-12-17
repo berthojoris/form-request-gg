@@ -21,13 +21,12 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         $tickets = Ticket::all();
-        $accountDigital = User::all()->pluck('name', 'id')->toArray();
-        $brandName = Brand::all()->pluck('name', 'id')->toArray();
+        $accountDigital = User::notadmin()->pluck('name', 'id')->toArray();
         $projectID = generateProjectID();
         session()->forget('projectid');
         session()->put('projectid', $projectID);
 
-        return view('ticket.index', compact('tickets', 'accountDigital', 'brandName'));
+        return view('ticket.index', compact('tickets', 'accountDigital'));
     }
 
     /**

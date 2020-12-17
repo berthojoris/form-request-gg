@@ -40,4 +40,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeNotadmin($query)
+    {
+        return $query->where('id', '<>', 1)->orderBy('name', 'ASC');
+    }
 }

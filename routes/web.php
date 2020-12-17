@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tickethistory', 'TickethistoryController@index')->name('upload_index');
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::get('/form-request', 'TicketController@formRequest')->name('formRequest');
+    Route::get('/add-user', 'TicketController@formRequest')->name('formRequest');
 
     // JSON DATA
     Route::group(['prefix' => 'data'], function () {

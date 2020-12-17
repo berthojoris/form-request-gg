@@ -8,18 +8,6 @@
 
             <div class="card-body">
 
-                @if($errors->any())
-                @foreach ($errors->all() as $error)
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    {{ $error }}
-                </div>
-                @endforeach
-                @endif
-
                 @if(Session::has('ticket.project_name'))
                 <p class="alert {{ Session::get('alert-class', 'alert-success') }}">
                     {{ Session::get('ticket.project_name') }} berhasil disubmit</p>
@@ -61,13 +49,12 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">Department Name</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Department Name<span
+                            class="required">*</span></label>
                         <div class="col-md-6">
-                            <select id="departemen_request" name="departemen_request" class="form-control fieldColor">
-                                @foreach ($brandName as $key => $val)
-                                <option value="{{ $key }}">{{ $val }}</option>
-                                @endforeach
-                            </select>
+                            <input id="departemen_request" type="text"
+                                class="form-control fieldColor @error('departemen_request') is-invalid @enderror"
+                                name="departemen_request" value="{{ old('departemen_request') }}" autocomplete="off">
                             @error('departemen_request')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -111,7 +98,7 @@
                         <div class="col-md-6">
                             <select id="user_destination" name="user_destination" class="form-control fieldColor">
                                 @foreach ($accountDigital as $key => $val)
-                                <option value="{{ $key }}">{{ $val }}</option>
+                                    <option value="{{ $key }}">{{ $val }}</option>
                                 @endforeach
                             </select>
                             @error('user_destination')
