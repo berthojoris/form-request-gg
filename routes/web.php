@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/fileupload', 'FileuploadController@index')->name('upload_index');
     Route::get('/tickethistory', 'TickethistoryController@index')->name('upload_index');
     Route::get('/profile', 'HomeController@profile')->name('profile');
+    Route::post('/profile/run', 'HomeController@updateProfile')->name('updateProfile');
     Route::get('/form-request', 'TicketController@formRequest')->name('formRequest');
     Route::get('/user-manage', 'UserController@index')->name('userManage');
     Route::get('/user-manage/edit/{user}', 'UserController@edit')->name('userEdit');
