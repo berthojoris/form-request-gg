@@ -165,7 +165,7 @@
                                                 <span class="invalid-feedback" role="alert" id="note_error"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label>Dokumen Upload <mark>( Abaikan jika tidak ingin mengupload )</mark></label>
+                                                <label>Document Upload <mark>Ignore. if dont want to upload</mark></label>
                                                 <div class="input-group">
                                                     <div class="input-group input-group-file" data-plugin="inputGroupFile">
                                                         <input type="text" class="form-control" readonly="" id="upFile" />
@@ -181,13 +181,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <button type="submit" id="btnSubmitHistory" class="btn btn-info ladda-button" data-style="zoom-in"
+                                                    <button type="submit" id="btnSubmitHistory" class="btn btn-info ladda-button float-right" data-style="zoom-in"
                                                         data-plugin="ladda">
                                                         <span class="ladda-label"><i class="icon wb-download mr-10" aria-hidden="true"></i>Save</span>
                                                     </button>
-                                                    <div class="col-md-12 hidden-xxl-down" id="loader">
-                                                        <img src="{{ asset('assets/loader.gif') }}" alt="">
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

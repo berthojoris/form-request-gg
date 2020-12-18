@@ -26,6 +26,7 @@ class Ticket extends Model
         'id' => 'integer',
         'user_destination' => 'integer',
         'estimated_budget' => 'double',
+        'digital_asset' => 'array'
     ];
 
     /**

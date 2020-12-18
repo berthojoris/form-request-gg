@@ -45,6 +45,16 @@ jQuery(function() {
         ]
     })
 
+    function buildArrayData(payload) {
+        if (_.isArray(payload)) {
+            var html = "";
+            _.forEach(payload, function(value) {
+                html += "<li> <i class='wb-check' aria-hidden='true'></i>" + value + "</li>"
+            })
+            return "<ul class='list-icons'>" + html + "</ul>"
+        }
+    }
+
     $('#tbl_ticket').on('click', 'tr', function() {
         var projectID = $('td', this).eq(1).text()
         $.ajax({
@@ -63,7 +73,7 @@ jQuery(function() {
                 $("#req_pic_request").html(response.pic_request)
                 $("#req_pic_target").html(response.user_destination.name)
                 $("#req_email").html(response.email_submited)
-                $("#req_digital_assets").html(response.digital_asset)
+                $("#req_digital_assets").html(buildArrayData(response.digital_asset))
                 $("#req_background").html(response.background)
                 $("#req_objective").html(response.objective)
                 $("#req_audience").html(response.target_audience)
