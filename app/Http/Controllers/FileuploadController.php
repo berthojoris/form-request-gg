@@ -44,9 +44,15 @@ class FileuploadController extends Controller
         return redirect()->route('fileupload.index');
     }
 
-    public function downloadFile($filename)
+    public function downloadHistoryFile($filename)
     {
         $file = storage_path()."/app/historyfile/".$filename;
+        return response()->download($file, $filename);
+    }
+
+    public function downloadRequestFile($filename)
+    {
+        $file = storage_path()."/app/requestdocument/".$filename;
         return response()->download($file, $filename);
     }
 }

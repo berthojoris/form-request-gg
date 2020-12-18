@@ -32,7 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/permissions', 'PermissionController@index')->name('permissions');
     Route::post('/permissions/create', 'PermissionController@create')->name('permission_roles');
 
-    Route::get('/download/file/{filename}', 'FileuploadController@downloadFile')->name('downloadFile');
+    Route::get('/download/history-file/{filename}', 'FileuploadController@downloadHistoryFile')->name('downloadHistoryFile');
+    Route::get('/download/request-file/{filename}', 'FileuploadController@downloadRequestFile')->name('downloadRequestFile');
 
 
     // JSON DATA
@@ -42,6 +43,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/user-store', 'UserController@store')->name('userStore');
         Route::get('/roles', 'RoleController@data')->name('roleData');
         Route::get('/permissions', 'PermissionController@data')->name('permissionData');
-        Route::get('/ticket/{projectId}/detail', 'TicketController@detailTicket')->name('detailTicket');
+        Route::post('/ticket/detail', 'TicketController@detailTicket')->name('detailTicket');
     });
 });

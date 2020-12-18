@@ -48,9 +48,12 @@ jQuery(function() {
     $('#tbl_ticket').on('click', 'tr', function() {
         var projectID = $('td', this).eq(1).text()
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: route('detailTicket', projectID),
             dataType: "json",
+            data: {
+                pid: projectID
+            },
             success: function(response) {
                 $("#ticket_id").val(response.id)
                 $("#req_status").html("<span class='badge badge-info badge-lg'>" + response.status + "</span>")
@@ -69,13 +72,20 @@ jQuery(function() {
                 $("#req_kpi").html(response.kpi)
                 $("#req_requirement_rules").html(response.requirement_rules)
                 $("#req_reference").html(response.reference)
-                $("#req_project_brief").html("<a href='" + route('downloadFile', response.project_brief) + "' target='_blank'>" + response.project_brief + "</a>")
+                $("#req_project_brief").html("<a href='" + route('downloadRequestFile', response.project_brief) + "' target='_blank'>" + response.project_brief + "</a>")
                 $("#req_campaign_start").html(moment(response.campaign_period_start).format("MMM Do YY"))
                 $("#req_campaign_end").html(moment(response.campaign_period_end).format("MMM Do YY"))
                 $("#req_estimated_budget").html("Rp." + $.number(response.estimated_budget, 0, '.', '.'))
-                $("#req_document_upload").html("<a href='" + route('downloadFile', response.document_upload) + "' target='_blank'>" + response.document_upload + "</a>")
+                $("#req_document_upload").html("<a href='" + route('downloadRequestFile', response.document_upload) + "' target='_blank'>" + response.document_upload + "</a>")
 
                 $('#modal_detail_request').modal({ backdrop: 'static', keyboard: false })
+            },
+            error: function(err) {
+                if (err.status === 404) {
+                    showMsg("Notification", "Data not found" + err.status, "error")
+                } else {
+                    showMsg("Notification", "Something wrong. Error code " + err.status, "error")
+                }
             }
         })
         $("#pid").html(projectID)
@@ -164,7 +174,7 @@ function statusBuilder(status) {
 function attachmentFile(fileName) {
     if (!_.isEmpty(fileName)) {
         return '<div class="alert alert-success" role="alert">\
-                    <a href="' + route('downloadFile', fileName) + '" target="_blank">Download Attachment File (' + fileName + ')</a>\
+                    <a href="' + route('downloadHistoryFile', fileName) + '" target="_blank">Download Attachment File</a>\
                 </div>'
     } else {
         return ""
@@ -175,9 +185,12 @@ function loadHistoryManual(pid) {
     $("#dataHistory").empty()
     $("#loadingHistory").removeClass("hidden-xxl-down");
     $.ajax({
-        type: "GET",
-        url: route('detailTicket', pid),
+        type: "POST",
+        url: route('detailTicket'),
         dataType: "json",
+        data: {
+            pid: pid
+        },
         success: function(response) {
             $("#loadingHistory").addClass("hidden-xxl-down");
             if (_.isEmpty(response.history)) {

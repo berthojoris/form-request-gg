@@ -23,7 +23,7 @@ class TicketStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'uuid' => ['string'],
             'project_id' => ['string'],
             'status' => ['string'],
@@ -41,13 +41,20 @@ class TicketStoreRequest extends FormRequest
             'kpi' => ['required', 'max:255'],
             'requirement_rules' => ['required', 'max:255'],
             'reference' => ['required', 'max:255'],
-            'project_brief' => ['file', 'mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip'],
             'estimated_budget' => ['required', 'string'],
-            'document_upload' => ['file'],
             'start' => ['required'],
             'end' => ['required'],
-            'document_upload' => ['file', 'mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip'],
             'input_city' => ['required_if:target_audience,Input Your City']
         ];
+
+        if(request('project_brief') || request()->hasFile('project_brief')) {
+            $rules['project_brief'] = 'file|mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip';
+        }
+
+        if(request('document_upload') || request()->hasFile('document_upload')) {
+            $rules['document_upload'] = 'file|mimes:pdf,doc,ppt,xls,docx,pptx,xlsx,rar,zip';
+        }
+
+        return $rules;
     }
 }

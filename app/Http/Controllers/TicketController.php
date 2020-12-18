@@ -15,10 +15,7 @@ use App\Http\Requests\TicketUpdateRequest;
 
 class TicketController extends Controller
 {
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $tickets = Ticket::all();
@@ -43,21 +40,17 @@ class TicketController extends Controller
     public function store(TicketStoreRequest $request)
     {
 
-        if ($request->hasFile('project_brief')) {
-            $pb = $request->file('project_brief');
-            $newFileName = Str::random(20) . "." . $pb->getClientOriginalExtension();
-        } else {
-            $newFileName = "empty.jpg";
+        if(request()->hasFile('project_brief')) {
+            $file = $request->file('project_brief');
+            $projectBriefDoc = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $file->move(storage_path()."/app/requestdocument", $projectBriefDoc);
         }
 
-        if ($request->hasFile('document_upload')) {
-            $du = $request->file('document_upload');
-            $documentUpload = Str::random(20) . "." . $du->getClientOriginalExtension();
-        } else {
-            $documentUpload = "empty.jpg";
+        if(request()->hasFile('document_upload')) {
+            $file = $request->file('document_upload');
+            $documentUpload = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $file->move(storage_path()."/app/requestdocument", $documentUpload);
         }
-
-        $destination = 'uploads';
 
         $ticket = Ticket::create([
             'project_name' => $request->project_name,
@@ -74,46 +67,20 @@ class TicketController extends Controller
             'kpi' => $request->kpi,
             'requirement_rules' => $request->requirement_rules,
             'reference' => $request->reference,
-            'project_brief' => $newFileName,
+            'project_brief' => $projectBriefDoc,
             'document_upload' => $documentUpload,
             'campaign_period_start' => indonesianDate($request->start),
             'campaign_period_end' => indonesianDate($request->end)
         ]);
-
-        if (!empty($pb)) {
-            $pb->move($destination, $newFileName);
-        }
-
-        if (!empty($du)) {
-            $du->move($destination, $documentUpload);
-        }
-
-        // $ticket->id->notify(new NotifyTicketCreated($ticket));
-
-        // JobTicketCreated::dispatch($ticket);
 
         $request->session()->flash('ticket.project_name', $ticket->project_name);
 
         return redirect()->route('ticket_index');
     }
 
-    public function update(TicketUpdateRequest $request, Ticket $ticket)
-    {
-        $ticket->update($request->validated());
-
-        $ticket->id->notify(new NotifyTicketCreated($ticket));
-
-        JobTicketUpdated::dispatch($ticket);
-
-        $request->session()->flash('ticket.project_name', $ticket->project_name);
-
-        return redirect()->route('ticket.index');
-    }
-
     public function destroy(Request $request, Ticket $ticket)
     {
         $ticket->delete();
-
         return redirect()->route('ticket.index');
     }
 
@@ -133,11 +100,20 @@ class TicketController extends Controller
         })->toJson();
     }
 
-    public function detailTicket($request)
+    public function detailTicket()
     {
         $data = Ticket::with(['userDestination', 'history' => function ($query) {
             $query->orderBy('id', 'desc');
-        }])->where('project_id', $request)->firstOrFail();
+        }])->where('project_id', request('pid'))->firstOrFail();
         return $data;
+    }
+
+    public function contohFunctionLengkap(TicketUpdateRequest $request, Ticket $ticket)
+    {
+        $ticket->update($request->validated());
+        $ticket->id->notify(new NotifyTicketCreated($ticket));
+        JobTicketUpdated::dispatch($ticket);
+        $request->session()->flash('ticket.project_name', $ticket->project_name);
+        return redirect()->route('ticket.index');
     }
 }

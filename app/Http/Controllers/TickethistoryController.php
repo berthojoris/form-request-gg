@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Tickethistory;
 use App\Http\Requests\TickethistoryStoreRequest;
 use App\Http\Requests\TickethistoryUpdateRequest;
-use App\Models\Tickethistory;
-use Illuminate\Http\Request;
 
 class TickethistoryController extends Controller
 {
@@ -26,7 +27,7 @@ class TickethistoryController extends Controller
     {
         if(request()->hasFile('document_upload')) {
             $file = $request->file('document_upload');
-            $randomName = rand() . '.' . $file->getClientOriginalExtension();
+            $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
             $file->move(storage_path()."/app/historyfile", $randomName);
         }
 
@@ -43,16 +44,5 @@ class TickethistoryController extends Controller
     public function edit(Request $request, Tickethistory $tickethistory)
     {
         return view('tickethistory.edit', compact('tickethistory'));
-    }
-
-    public function update(TickethistoryUpdateRequest $request, Tickethistory $tickethistory)
-    {
-        $tickethistory->update($request->validated());
-
-        $ticket->id->notify(new NotifyTicketCreated($tickethistory));
-
-        $request->session()->flash('tickethistory', $tickethistory);
-
-        return redirect()->route('tickethistory.index');
     }
 }
