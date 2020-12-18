@@ -23,12 +23,16 @@ class TickethistoryStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'uuid' => ['required', 'string'],
+        $rules = [
             'ticket_id' => ['required', 'integer', 'exists:Tickets,id'],
             'status' => ['required', 'in:ACCEPTED,ON_PROGRESS,PENDING,CANCELED,DONE'],
             'note' => ['required', 'string'],
-            'document_upload' => ['string'],
         ];
+
+        if(request('document_upload') || request()->hasFile('document_upload')) {
+            $rules['document_upload'] = 'mimes:jpeg,png,pdf,xls,xlsx,doc,docx,rar,zip|max:5048';
+        }
+
+        return $rules;
     }
 }

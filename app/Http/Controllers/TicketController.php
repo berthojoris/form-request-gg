@@ -135,23 +135,9 @@ class TicketController extends Controller
 
     public function detailTicket($request)
     {
-        $data = Ticket::with('userDestination')->where('project_id', $request)->firstOrFail();
+        $data = Ticket::with(['userDestination', 'history' => function ($query) {
+            $query->orderBy('id', 'desc');
+        }])->where('project_id', $request)->firstOrFail();
         return $data;
-    }
-
-    public function createDetail(Request $request)
-    {
-        $validate = $this->validate($request, [
-            'ticket_id' => 'integer',
-            'status' => 'required',
-            'note' => 'required',
-            'document_upload' => 'sometimes|mimes:jpeg,bmp,png,pdf,xls,xlsx,doc,docx'
-        ]);
-
-        logger($validate);
-
-        return jsonOutput("Detail Created", null, 201);
-
-        // Tickethistory::create($validate);
     }
 }

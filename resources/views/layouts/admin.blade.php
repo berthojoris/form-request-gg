@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="{{ asset('global/vendor/intro-js/introjs.css') }}">
     <link rel="stylesheet" href="{{ asset('global/vendor/slidepanel/slidePanel.css') }}">
     <link rel="stylesheet" href="{{ asset('global/vendor/flag-icon-css/flag-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('global/vendor/nprogress/nprogress.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/examples/css/advanced/animation.css') }}">
 
 
     <!-- Fonts -->
@@ -98,6 +100,8 @@
     <script src="{{ asset('global/vendor/intro-js/intro.js') }}"></script>
     <script src="{{ asset('global/vendor/screenfull/screenfull.js') }}"></script>
     <script src="{{ asset('global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
+    <script src="{{ asset('global/vendor/jquery-appear/jquery.appear.js') }}"></script>
+    <script src="{{ asset('global/vendor/nprogress/nprogress.js') }}"></script>
     @stack('pluginJS')
 
     <!-- Scripts -->
@@ -138,6 +142,12 @@
     scrollable-container {
         height: 100%;
         width: 277px;
+    }
+    .invalid-feedback {
+        display: none;
+        margin-top: .25rem;
+        font-size: .975rem;
+        color: #ff0008;
     }
     </style>
 

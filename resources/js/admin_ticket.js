@@ -43,15 +43,16 @@ jQuery(function() {
                 sortable: false,
             }
         ]
-    });
+    })
 
     $('#tbl_ticket').on('click', 'tr', function() {
-        var projectID = $('td', this).eq(1).text();
+        var projectID = $('td', this).eq(1).text()
         $.ajax({
             type: "GET",
             url: route('detailTicket', projectID),
             dataType: "json",
             success: function(response) {
+                $("#ticket_id").val(response.id)
                 $("#req_status").html("<span class='badge badge-info badge-lg'>" + response.status + "</span>")
                 $("#req_project_id").html(response.project_id)
                 $("#req_project_name").html(response.project_name)
@@ -68,16 +69,17 @@ jQuery(function() {
                 $("#req_kpi").html(response.kpi)
                 $("#req_requirement_rules").html(response.requirement_rules)
                 $("#req_reference").html(response.reference)
-                $("#req_project_brief").html("<a href='" + route('downloadFile', response.project_brief) + "'>" + response.project_brief + "</a>")
+                $("#req_project_brief").html("<a href='" + route('downloadFile', response.project_brief) + "' target='_blank'>" + response.project_brief + "</a>")
                 $("#req_campaign_start").html(moment(response.campaign_period_start).format("MMM Do YY"))
                 $("#req_campaign_end").html(moment(response.campaign_period_end).format("MMM Do YY"))
                 $("#req_estimated_budget").html("Rp." + $.number(response.estimated_budget, 0, '.', '.'))
-                $("#req_document_upload").html("<a href='" + route('downloadFile', response.document_upload) + "'>" + response.document_upload + "</a>")
+                $("#req_document_upload").html("<a href='" + route('downloadFile', response.document_upload) + "' target='_blank'>" + response.document_upload + "</a>")
 
                 $('#modal_detail_request').modal({ backdrop: 'static', keyboard: false })
             }
         })
         $("#pid").html(projectID)
+        $("#projectID").val(projectID)
     });
 
 
@@ -88,4 +90,109 @@ jQuery(function() {
         $('[href="#tabDetailRequest"]').tab('show')
         $("select#status").prop('selectedIndex', 0)
     })
+
+    //https://github.com/msurguy/ladda-bootstrap
+
+    var btnLoading = Ladda.create(document.querySelector('#btnSubmitHistory'))
+
+    $("#form_create_history").on('submit', function(e) {
+        e.preventDefault()
+        $('.invalid-feedback').empty()
+        $('.invalid-feedback').hide()
+        btnLoading.start()
+        $.ajax({
+            type: "POST",
+            url: route('createDetail'),
+            data: new FormData(this),
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                btnLoading.stop()
+                resetForm()
+                showMsg("Notification", response.msg, "success")
+            },
+            error: function(err) {
+                btnLoading.stop()
+                if (err.status === 422) {
+                    $('.invalid-feedback').show()
+                    var errors = $.parseJSON(err.responseText)
+                    $.each(errors.errors, function(key, val) {
+                        $("#" + key + "_error").html(val[0])
+                    });
+                } else if (err.status === 404) {
+                    showMsg("Notification", "Data not found" + err.status, "error")
+                } else {
+                    showMsg("Notification", "Something wrong. Error code " + err.status, "error")
+                }
+            }
+        })
+    })
 })
+
+function resetForm() {
+    $("select").prop('selectedIndex', 0)
+    $(':input')
+        .not(':button, :submit, :reset, :hidden, select')
+        .val('')
+        .prop('checked', false)
+}
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    var target = $(e.target).attr("href")
+    if (target == '#tabHistoryRequest') {
+        loadHistoryManual($("#projectID").val())
+    }
+})
+
+function statusBuilder(status) {
+    var className = ''
+    if (status == "ON_PROGRESS") {
+        className = 'badge-success';
+    } else if (status == "PENDING") {
+        className = 'badge-warning';
+    } else if (status == "CANCELED") {
+        className = 'badge-danger';
+    } else {
+        className = 'badge-info';
+    }
+    var html = '<b><span class="badge ' + className + ' badge-lg">' + status + '</span></b>'
+    return html
+}
+
+function attachmentFile(fileName) {
+    if (!_.isEmpty(fileName)) {
+        return '<div class="alert alert-success" role="alert">\
+                    <a href="' + route('downloadFile', fileName) + '" target="_blank">Download Attachment File (' + fileName + ')</a>\
+                </div>'
+    } else {
+        return ""
+    }
+}
+
+function loadHistoryManual(pid) {
+    $("#dataHistory").empty()
+    $("#loadingHistory").removeClass("hidden-xxl-down");
+    $.ajax({
+        type: "GET",
+        url: route('detailTicket', pid),
+        dataType: "json",
+        success: function(response) {
+            $("#loadingHistory").addClass("hidden-xxl-down");
+            if (_.isEmpty(response.history)) {
+                $("#dataHistory").html('<div class="alert alert-info alert-dismissible" role="alert">History is empty</div>')
+            } else {
+                _.forEach(response.history, function(value, key) {
+                    $("#dataHistory").append('\
+                    <div class="list-group">\
+                        <a class="list-group-item flex-column align-items-start" href="javascript:void(0)">\
+                            <h4 class="list-group-item-heading mt-0 mb-5"> Status : ' + statusBuilder(value.status) + ' </h4>\
+                            <p class="mb-0">' + value.note + '</p> \
+                        </a>' + attachmentFile(value.document_upload) + '\
+                    </div>');
+                })
+            }
+        }
+    })
+}

@@ -44,6 +44,11 @@ class Ticket extends Model
         return $this->belongsTo(\App\Models\User::class, 'user_destination', 'id');
     }
 
+    public function history()
+    {
+        return $this->hasMany(\App\Models\Tickethistory::class, 'ticket_id', 'id');
+    }
+
     public function scopeForme($query)
     {
         if(myid() == 1) {

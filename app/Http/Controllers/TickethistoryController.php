@@ -9,10 +9,7 @@ use Illuminate\Http\Request;
 
 class TickethistoryController extends Controller
 {
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $tickethistories = Tickethistory::all();
@@ -20,44 +17,34 @@ class TickethistoryController extends Controller
         return view('tickethistory.index', compact('tickethistories'));
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Tickethistory $tickethistory
-     * @return \Illuminate\Http\Response
-     */
     public function show(Request $request, Tickethistory $tickethistory)
     {
         return view('tickethistory.show', compact('tickethistory'));
     }
 
-    /**
-     * @param \App\Http\Requests\TickethistoryStoreRequest $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(TickethistoryStoreRequest $request)
     {
-        $tickethistory = Tickethistory::create($request->validated());
+        if(request()->hasFile('document_upload')) {
+            $file = $request->file('document_upload');
+            $randomName = rand() . '.' . $file->getClientOriginalExtension();
+            $file->move(storage_path()."/app/historyfile", $randomName);
+        }
 
-        $request->session()->flash('tickethistory', $tickethistory);
+        Tickethistory::create([
+            'ticket_id' => request('ticket_id'),
+            'status' => request('status'),
+            'note' => request('note'),
+            'document_upload' => (request()->hasFile('document_upload')) ? $randomName : null
+        ]);
 
-        return redirect()->route('tickethistory.index');
+        return jsonOutput("History Created", null, 201);
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Tickethistory $tickethistory
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, Tickethistory $tickethistory)
     {
         return view('tickethistory.edit', compact('tickethistory'));
     }
 
-    /**
-     * @param \App\Http\Requests\TickethistoryUpdateRequest $request
-     * @param \App\Models\Tickethistory $tickethistory
-     * @return \Illuminate\Http\Response
-     */
     public function update(TickethistoryUpdateRequest $request, Tickethistory $tickethistory)
     {
         $tickethistory->update($request->validated());

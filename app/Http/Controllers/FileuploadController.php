@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FileuploadStoreRequest;
 use App\Models\Fileupload;
 use Illuminate\Http\Request;
+use App\Http\Requests\FileuploadStoreRequest;
 
 class FileuploadController extends Controller
 {
@@ -46,6 +46,7 @@ class FileuploadController extends Controller
 
     public function downloadFile($filename)
     {
-        dd($filename);
+        $file = storage_path()."/app/historyfile/".$filename;
+        return response()->download($file, $filename);
     }
 }
