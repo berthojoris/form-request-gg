@@ -207,6 +207,8 @@
 <link rel="stylesheet" href="{{ asset('global/fonts/font-awesome/font-awesome.css') }}">
 <link rel="stylesheet" href="{{ asset('global/vendor/ladda/ladda.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/examples/css/uikit/buttons.css') }}">
+<link rel="stylesheet" href="{{ asset('global/vendor/alertify/alertify.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/examples/css/advanced/alertify.css') }}">
 @endpush
 
 @push('pluginJS')
@@ -221,6 +223,7 @@
 <script src="{{ asset('global/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
 <script src="{{ asset('global/vendor/ladda/spin.min.js') }}"></script>
 <script src="{{ asset('global/vendor/ladda/ladda.min.js') }}"></script>
+<script src="{{ asset('global/vendor/alertify/alertify.js') }}"></script>
 @endpush
 
 @push('pageJS')
@@ -229,5 +232,6 @@
 <script src="{{ asset('global/js/Plugin/loading-button.js') }}"></script>
 <script src="{{ asset('global/js/Plugin/more-button.js') }}"></script>
 <script src="{{ asset('global/js/Plugin/ladda.js') }}"></script>
+<script src="{{ asset('global/js/Plugin/alertify.js') }}"></script>
 <script src="{{ asset('js/admin_ticket.js') }}"></script>
 @endpush

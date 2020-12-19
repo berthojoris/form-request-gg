@@ -57,6 +57,7 @@ jQuery(function() {
 
     $('#tbl_ticket').on('click', 'tr', function() {
         var projectID = $('td', this).eq(1).text()
+        alertify.success('OPEN PROJECT ID <b>' + projectID + '</b>')
         $.ajax({
             type: "POST",
             url: route('detailTicket', projectID),
