@@ -105,6 +105,8 @@ jQuery(function() {
 
 
     $('#modal_detail_request').on('hide.bs.modal', function() {
+        $('.invalid-feedback').empty()
+        $('.invalid-feedback').hide()
         $("#upFile").val('')
         $("#note").val('')
         $('[href="#tabDetailRequest"]').tab('show')
@@ -160,6 +162,8 @@ function resetForm() {
 }
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    $('.invalid-feedback').empty()
+    $('.invalid-feedback').hide()
     var target = $(e.target).attr("href")
     if (target == '#tabHistoryRequest') {
         loadHistoryManual($("#projectID").val())
