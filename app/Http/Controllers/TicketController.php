@@ -43,7 +43,7 @@ class TicketController extends Controller
     public function store(TicketStoreRequest $request)
     {
 
-        DB::transaction(function () {
+        DB::transaction(function () use ($request) {
 
             if(request()->hasFile('project_brief')) {
                 $file = $request->file('project_brief');
