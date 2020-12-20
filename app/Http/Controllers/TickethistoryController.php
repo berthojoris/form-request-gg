@@ -48,9 +48,10 @@ class TickethistoryController extends Controller
             $receiveEmail = $ticket->email_submited;
 
             Mail::to($receiveEmail)->send(new RequestHistory($ticketHistory));
+            return jsonOutput("History Created", null, 201);
         });
 
-        return jsonOutput("History Created", null, 201);
+
     }
 
     public function edit(Request $request, Tickethistory $tickethistory)
