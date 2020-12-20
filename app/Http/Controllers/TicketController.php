@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Tickethistory;
 use App\Jobs\JobTicketCreated;
 use App\Jobs\JobTicketUpdated;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\TicketStoreRequest;
 use App\Http\Requests\TicketUpdateRequest;
@@ -42,43 +43,47 @@ class TicketController extends Controller
     public function store(TicketStoreRequest $request)
     {
 
-        if(request()->hasFile('project_brief')) {
-            $file = $request->file('project_brief');
-            $projectBriefDoc = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $file->move(storage_path()."/app/requestdocument", $projectBriefDoc);
-        }
+        DB::transaction(function () {
 
-        if(request()->hasFile('document_upload')) {
-            $file = $request->file('document_upload');
-            $documentUpload = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $file->move(storage_path()."/app/requestdocument", $documentUpload);
-        }
+            if(request()->hasFile('project_brief')) {
+                $file = $request->file('project_brief');
+                $projectBriefDoc = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $file->move(storage_path()."/app/requestdocument", $projectBriefDoc);
+            }
 
-        $ticket = Ticket::create([
-            'project_name' => $request->project_name,
-            'departemen_request' => $request->departemen_request,
-            'pic_request' => $request->pic_request,
-            'email_submited' => $request->email_submited,
-            'user_destination' => $request->user_destination,
-            'background' => $request->background,
-            'objective' => $request->objective,
-            'digital_asset' => json_encode($request->digital_asset),
-            'target_audience' => $request->target_audience,
-            'creative_consideration' => $request->creative_consideration,
-            'support_other_channel' => $request->support_other_channel,
-            'kpi' => $request->kpi,
-            'requirement_rules' => $request->requirement_rules,
-            'reference' => $request->reference,
-            'project_brief' => $projectBriefDoc,
-            'document_upload' => $documentUpload,
-            'campaign_period_start' => indonesianDate($request->start),
-            'campaign_period_end' => indonesianDate($request->end)
-        ]);
+            if(request()->hasFile('document_upload')) {
+                $file = $request->file('document_upload');
+                $documentUpload = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $file->move(storage_path()."/app/requestdocument", $documentUpload);
+            }
 
-        $data = Ticket::with('userDestination')->where('user_destination', $request->user_destination)->firstOrFail();
+            $ticket = Ticket::create([
+                'project_name' => $request->project_name,
+                'departemen_request' => $request->departemen_request,
+                'pic_request' => $request->pic_request,
+                'email_submited' => $request->email_submited,
+                'user_destination' => $request->user_destination,
+                'background' => $request->background,
+                'objective' => $request->objective,
+                'digital_asset' => json_encode($request->digital_asset),
+                'target_audience' => $request->target_audience,
+                'creative_consideration' => $request->creative_consideration,
+                'support_other_channel' => $request->support_other_channel,
+                'kpi' => $request->kpi,
+                'requirement_rules' => $request->requirement_rules,
+                'reference' => $request->reference,
+                'project_brief' => $projectBriefDoc,
+                'document_upload' => $documentUpload,
+                'campaign_period_start' => indonesianDate($request->start),
+                'campaign_period_end' => indonesianDate($request->end)
+            ]);
 
-        Mail::to($request->email_submited)->send(new RequestCreated($ticket));
-        Mail::to($data->userDestination->email)->send(new RequestCreated($ticket));
+            $data = Ticket::with('userDestination')->where('user_destination', $request->user_destination)->firstOrFail();
+
+            Mail::to($request->email_submited)->send(new RequestCreated($ticket));
+            Mail::to($data->userDestination->email)->send(new RequestCreated($ticket));
+
+        });
 
         $request->session()->flash('ticket.project_name', $ticket->project_name);
 
