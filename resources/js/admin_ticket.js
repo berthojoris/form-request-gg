@@ -87,8 +87,11 @@ jQuery(function() {
                 $("#req_campaign_start").html(moment(response.campaign_period_start).format("MMM Do YY"))
                 $("#req_campaign_end").html(moment(response.campaign_period_end).format("MMM Do YY"))
                 $("#req_estimated_budget").html("Rp." + $.number(response.estimated_budget, 0, '.', '.'))
-                $("#req_document_upload").html("<a href='" + route('downloadRequestFile', response.document_upload) + "' target='_blank'>" + response.document_upload + "</a>")
-
+                if (_.isEmpty(response.document_upload)) {
+                    $("#req_document_upload").html("-")
+                } else {
+                    $("#req_document_upload").html("<a href='" + route('downloadRequestFile', response.document_upload) + "' target='_blank'>" + response.document_upload + "</a>")
+                }
                 $('#modal_detail_request').modal({ backdrop: 'static', keyboard: false })
             },
             error: function(err) {
