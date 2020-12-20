@@ -142,8 +142,10 @@ jQuery(function() {
                         $("#" + key + "_error").html(val[0])
                     });
                 } else if (err.status === 404) {
+                    resetForm()
                     showMsg("Notification", "Data not found" + err.status, "error")
                 } else {
+                    resetForm()
                     showMsg("Notification", "Something wrong. Error code " + err.status, "error")
                 }
                 $("#btnSubmitHistory").prop("disabled", false).html("Save")

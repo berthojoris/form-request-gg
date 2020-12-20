@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Mail\RequestHistory;
 use Illuminate\Http\Request;
 use App\Models\Tickethistory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\TickethistoryStoreRequest;
 use App\Http\Requests\TickethistoryUpdateRequest;
@@ -34,17 +35,19 @@ class TickethistoryController extends Controller
             $file->move(storage_path()."/app/historyfile", $randomName);
         }
 
-        $ticketHistory = Tickethistory::create([
-            'ticket_id' => request('ticket_id'),
-            'status' => request('status'),
-            'note' => request('note'),
-            'document_upload' => (request()->hasFile('document_upload')) ? $randomName : null
-        ]);
+        DB::transaction(function () {
+            $ticketHistory = Tickethistory::create([
+                'ticket_id' => request('ticket_id'),
+                'status' => request('status'),
+                'note' => request('note'),
+                'document_upload' => (request()->hasFile('document_upload')) ? $randomName : null
+            ]);
 
-        $ticket = Ticket::find(request('ticket_id'))->first();
-        $receiveEmail = $ticket->email_submited;
+            $ticket = Ticket::find(request('ticket_id'))->first();
+            $receiveEmail = $ticket->email_submited;
 
-        Mail::to($receiveEmail)->send(new RequestHistory($ticketHistory));
+            Mail::to($receiveEmail)->send(new RequestHistory($ticketHistory));
+        });
 
         return jsonOutput("History Created", null, 201);
     }
