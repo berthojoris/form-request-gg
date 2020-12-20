@@ -6,10 +6,12 @@ use App\Models\User;
 use App\Models\Brand;
 use App\Models\Ticket;
 use Illuminate\Support\Str;
+use App\Mail\RequestCreated;
 use Illuminate\Http\Request;
 use App\Models\Tickethistory;
 use App\Jobs\JobTicketCreated;
 use App\Jobs\JobTicketUpdated;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\TicketStoreRequest;
 use App\Http\Requests\TicketUpdateRequest;
 
@@ -72,6 +74,11 @@ class TicketController extends Controller
             'campaign_period_start' => indonesianDate($request->start),
             'campaign_period_end' => indonesianDate($request->end)
         ]);
+
+        $data = Ticket::with('userDestination')->where('user_destination', $request->user_destination)->firstOrFail();
+
+        Mail::to($request->email_submited)->send(new RequestCreated($ticket));
+        Mail::to($data->userDestination->email)->send(new RequestCreated($ticket));
 
         $request->session()->flash('ticket.project_name', $ticket->project_name);
 

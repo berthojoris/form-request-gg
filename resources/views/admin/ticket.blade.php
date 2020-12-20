@@ -181,9 +181,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <button type="submit" id="btnSubmitHistory" class="btn btn-info ladda-button float-right" data-style="zoom-in"
-                                                        data-plugin="ladda">
-                                                        <span class="ladda-label"><i class="icon wb-download mr-10" aria-hidden="true"></i>Save</span>
+                                                    <button type="submit" id="btnSubmitHistory" class="btn btn-info float-right">
+                                                        <span>Save</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -221,8 +220,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="{{ asset('js/number.min.js') }}"></script>
 <script src="{{ asset('global/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
-<script src="{{ asset('global/vendor/ladda/spin.min.js') }}"></script>
-<script src="{{ asset('global/vendor/ladda/ladda.min.js') }}"></script>
 <script src="{{ asset('global/vendor/alertify/alertify.js') }}"></script>
 @endpush
 
@@ -231,7 +228,6 @@
 <script src="{{ asset('global/js/Plugin/input-group-file.js') }}"></script>
 <script src="{{ asset('global/js/Plugin/loading-button.js') }}"></script>
 <script src="{{ asset('global/js/Plugin/more-button.js') }}"></script>
-<script src="{{ asset('global/js/Plugin/ladda.js') }}"></script>
 <script src="{{ asset('global/js/Plugin/alertify.js') }}"></script>
 <script src="{{ asset('js/admin_ticket.js') }}"></script>
 @endpush

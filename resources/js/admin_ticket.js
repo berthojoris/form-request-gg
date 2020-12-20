@@ -116,13 +116,11 @@ jQuery(function() {
 
     //https://github.com/msurguy/ladda-bootstrap
 
-    var btnLoading = Ladda.create(document.querySelector('#btnSubmitHistory'))
-
     $("#form_create_history").on('submit', function(e) {
         e.preventDefault()
+        $("#btnSubmitHistory").prop("disabled", true).html("Submiting....")
         $('.invalid-feedback').empty()
         $('.invalid-feedback').hide()
-        btnLoading.start()
         $.ajax({
             type: "POST",
             url: route('createDetail'),
@@ -132,12 +130,11 @@ jQuery(function() {
             cache: false,
             processData: false,
             success: function(response) {
-                btnLoading.stop()
                 resetForm()
                 showMsg("Notification", response.msg, "success")
+                $("#btnSubmitHistory").prop("disabled", false).html("Save")
             },
             error: function(err) {
-                btnLoading.stop()
                 if (err.status === 422) {
                     $('.invalid-feedback').show()
                     var errors = $.parseJSON(err.responseText)
@@ -149,6 +146,7 @@ jQuery(function() {
                 } else {
                     showMsg("Notification", "Something wrong. Error code " + err.status, "error")
                 }
+                $("#btnSubmitHistory").prop("disabled", false).html("Save")
             }
         })
     })
