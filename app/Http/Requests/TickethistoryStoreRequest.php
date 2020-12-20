@@ -24,7 +24,7 @@ class TickethistoryStoreRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'ticket_id' => ['required', 'integer', 'exists:Tickets,id'],
+            'ticket_id' => ['required', 'integer', 'exists:tickets,id'],
             'status' => ['required', 'in:ACCEPTED,ON_PROGRESS,PENDING,CANCELED,DONE'],
             'note' => ['required', 'string'],
         ];

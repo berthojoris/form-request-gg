@@ -12,7 +12,6 @@
                     <span class="ml-15 font-weight-400">TICKET REQUEST</span>
                     <div class="content-text text-center mb-0">
                         <span class="font-size-40 font-weight-100">{{ $ticket }}</span>
-                        <p class="blue-grey-400 font-weight-100 m-0">+45% From previous month</p>
                     </div>
                 </div>
             </div>
@@ -26,7 +25,6 @@
                     <span class="ml-15 font-weight-400">HISTORY TICKET REQUEST</span>
                     <div class="content-text text-center mb-0">
                         <span class="font-size-40 font-weight-100">{{ $history }}</span>
-                        <p class="blue-grey-400 font-weight-100 m-0">+45% From previous month</p>
                     </div>
                 </div>
             </div>
