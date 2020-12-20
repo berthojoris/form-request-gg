@@ -42,8 +42,8 @@ class TicketController extends Controller
 
     public function store(TicketStoreRequest $request)
     {
-        DB::transaction(function () use ($request) {
-
+        DB::beginTransaction();
+        try {
             if(request()->hasFile('project_brief')) {
                 $file = $request->file('project_brief');
                 $projectBriefDoc = Str::random(20) . '.' . $file->getClientOriginalExtension();
@@ -81,9 +81,14 @@ class TicketController extends Controller
 
             Mail::to($request->email_submited)->send(new RequestCreated($ticket));
             Mail::to($data->userDestination->email)->send(new RequestCreated($ticket));
-        });
-        $request->session()->flash('ticket.project_name', $ticket->project_name);
-        return redirect()->route('ticket_index');
+
+            DB::commit();
+            $request->session()->flash('ticket.project_name', $ticket->project_name);
+            return redirect()->route('ticket_index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return jsonOutput("Fail to save request", null, 500);
+        }
     }
 
     public function destroy(Request $request, Ticket $ticket)

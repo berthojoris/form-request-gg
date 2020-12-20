@@ -21,6 +21,6 @@ class RequestHistory extends Mailable
 
     public function build()
     {
-        return $this->from('jarvis@berthojoris.com')->markdown('emails.request_history');
+        return $this->from('jarvis@berthojoris.com', 'Jarvis')->markdown('emails.request_history');
     }
 }

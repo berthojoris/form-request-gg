@@ -21,6 +21,6 @@ class RequestCreated extends Mailable
 
     public function build()
     {
-        return $this->from('jarvis@berthojoris.com')->markdown('emails.request_created');
+        return $this->from('jarvis@berthojoris.com', 'Jarvis')->markdown('emails.request_created');
     }
 }
