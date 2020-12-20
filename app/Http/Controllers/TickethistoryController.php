@@ -35,7 +35,7 @@ class TickethistoryController extends Controller
             $file->move(storage_path()."/app/historyfile", $randomName);
         }
 
-        DB::transaction(function () {
+        DB::transaction(function () use ($randomName) {
             $ticketHistory = Tickethistory::create([
                 'ticket_id' => request('ticket_id'),
                 'status' => request('status'),
