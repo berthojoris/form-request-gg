@@ -29,13 +29,14 @@ class TickethistoryController extends Controller
 
     public function store(TickethistoryStoreRequest $request)
     {
-        if(request()->hasFile('document_upload')) {
-            $file = $request->file('document_upload');
-            $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $file->move(storage_path()."/app/historyfile", $randomName);
-        }
+        DB::transaction(function () use ($request) {
 
-        DB::transaction(function () use ($randomName) {
+            if(request()->hasFile('document_upload')) {
+                $file = $request->file('document_upload');
+                $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $file->move(storage_path()."/app/historyfile", $randomName);
+            }
+
             $ticketHistory = Tickethistory::create([
                 'ticket_id' => request('ticket_id'),
                 'status' => request('status'),
