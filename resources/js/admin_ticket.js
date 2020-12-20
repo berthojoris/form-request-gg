@@ -144,7 +144,7 @@ jQuery(function() {
                 } else if (err.status === 404) {
                     resetForm()
                     showMsg("Notification", "Data not found" + err.status, "error")
-                } else {
+                } else if (err.status === 500) {
                     resetForm()
                     showMsg("Notification", "Something wrong. Error code " + err.status, "error")
                 }
