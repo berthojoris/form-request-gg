@@ -29,8 +29,8 @@ class TickethistoryController extends Controller
 
     public function store(TickethistoryStoreRequest $request)
     {
-        DB::transaction(function () use ($request) {
-
+        DB::beginTransaction();
+        try {
             if(request()->hasFile('document_upload')) {
                 $file = $request->file('document_upload');
                 $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
@@ -48,10 +48,12 @@ class TickethistoryController extends Controller
             $receiveEmail = $ticket->email_submited;
 
             Mail::to($receiveEmail)->send(new RequestHistory($ticketHistory));
+            DB::commit();
             return jsonOutput("History Created", null, 201);
-        });
-
-
+        } catch (\Exception $e) {
+            DB::rollback();
+            return jsonOutput("Fail to save history", null, 500);
+        }
     }
 
     public function edit(Request $request, Tickethistory $tickethistory)

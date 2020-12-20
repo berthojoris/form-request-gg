@@ -81,10 +81,9 @@ class TicketController extends Controller
 
             Mail::to($request->email_submited)->send(new RequestCreated($ticket));
             Mail::to($data->userDestination->email)->send(new RequestCreated($ticket));
-
-            $request->session()->flash('ticket.project_name', $ticket->project_name);
-            return redirect()->route('ticket_index');
         });
+        $request->session()->flash('ticket.project_name', $ticket->project_name);
+        return redirect()->route('ticket_index');
     }
 
     public function destroy(Request $request, Ticket $ticket)
