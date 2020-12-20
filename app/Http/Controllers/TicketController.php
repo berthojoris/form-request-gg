@@ -48,12 +48,16 @@ class TicketController extends Controller
                 $file = $request->file('project_brief');
                 $projectBriefDoc = Str::random(20) . '.' . $file->getClientOriginalExtension();
                 $file->move(storage_path()."/app/requestdocument", $projectBriefDoc);
+            } else {
+                $projectBriefDoc = null;
             }
 
             if(request()->hasFile('document_upload')) {
                 $file = $request->file('document_upload');
                 $documentUpload = Str::random(20) . '.' . $file->getClientOriginalExtension();
                 $file->move(storage_path()."/app/requestdocument", $documentUpload);
+            } else {
+                $documentUpload = null;
             }
 
             $ticket = Ticket::create([
@@ -87,7 +91,7 @@ class TicketController extends Controller
             return redirect()->route('ticket_index');
         } catch (\Exception $e) {
             DB::rollback();
-            return jsonOutput("Fail to save request", null, 500);
+            dd($e);
         }
     }
 

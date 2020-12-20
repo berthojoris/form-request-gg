@@ -44,6 +44,7 @@ class TicketStoreRequest extends FormRequest
             'estimated_budget' => ['required', 'string'],
             'start' => ['required'],
             'end' => ['required'],
+            'project_brief' => ['required'],
             'input_city' => ['required_if:target_audience,Input Your City']
         ];
 
