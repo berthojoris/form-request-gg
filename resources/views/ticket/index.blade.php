@@ -114,7 +114,7 @@
                                 class="required">*</span></label>
                         <div class="col-md-6">
                             <div class="row @error('digital_asset') redBox @enderror">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="checkbox-custom checkbox-primary">
                                         <input type="checkbox" name="digital_asset[]" value="Webiste">
                                         <label for="digital_asset[]">Webiste</label>
@@ -136,7 +136,7 @@
                                         <label for="digital_asset[]">Twitter</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="checkbox-custom checkbox-primary">
                                         <input type="checkbox" name="digital_asset[]" value="Youtube">
                                         <label for="digital_asset[]">Youtube</label>
@@ -195,14 +195,20 @@
                         <label for="name" class="col-md-4 col-form-label text-md-right">Target Audience<span
                                 class="required">*</span>
                         </label>
-                        <div class="col-md-6 @error('target_audience') is-invalid @enderror">
-                            <div class="radio-custom checkbox-primary">
-                                <input type="radio" name="target_audience" value="National Wide">
-                                <label for="target_audience">National Wide</label>
-                            </div>
-                            <div class="radio-custom checkbox-primary">
-                                <input type="radio" name="target_audience" value="Selected City">
-                                <label for="target_audience">Selected City</label>
+                        <div class="col-md-6">
+                            <div class="row @error('target_audience') redBox m5 @enderror">
+                                <div class="col-md-12">
+                                    <div class="radio-custom checkbox-primary">
+                                        <input type="radio" name="target_audience" value="National Wide">
+                                        <label for="target_audience">National Wide</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="radio-custom checkbox-primary">
+                                        <input type="radio" name="target_audience" value="Selected City">
+                                        <label for="target_audience">Selected City</label>
+                                    </div>
+                                </div>
                             </div>
                             @error('target_audience')
                             <small style="display: inline;" class="invalid-feedback" data-fv-validator="notEmpty"
@@ -338,7 +344,7 @@
                                 class="required">*</span></label>
                         <div class="col-md-6">
                             <div class="input-daterange" data-plugin="datepicker">
-                                <div class="row m5 @error('estimated_budget') redBox @enderror">
+                                <div class="row m5 @error('start') redBox @enderror">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="icon wb-calendar" aria-hidden="true"></i>
