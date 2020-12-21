@@ -116,41 +116,41 @@
                             <div class="row @error('digital_asset') redBox @enderror">
                                 <div class="col-md-5">
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Webiste">
+                                        <input type="checkbox" name="digital_asset[]" value="Webiste" {{ (is_array(old('digital_asset')) && (in_array('Webiste', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Webiste</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Mobile Apps">
+                                        <input type="checkbox" name="digital_asset[]" value="Mobile Apps" {{ (is_array(old('digital_asset')) && (in_array('Mobile Apps', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Mobile Apps</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Instagram">
+                                        <input type="checkbox" name="digital_asset[]" value="Instagram" {{ (is_array(old('digital_asset')) && (in_array('Instagram', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Instagram</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Facebook">
+                                        <input type="checkbox" name="digital_asset[]" value="Facebook" {{ (is_array(old('digital_asset')) && (in_array('Facebook', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Facebook</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Twitter">
+                                        <input type="checkbox" name="digital_asset[]" value="Twitter" {{ (is_array(old('digital_asset')) && (in_array('Twitter', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Twitter</label>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Youtube">
+                                        <input type="checkbox" name="digital_asset[]" value="Youtube" {{ (is_array(old('digital_asset')) && (in_array('Youtube', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Youtube</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Facebook Group">
+                                        <input type="checkbox" name="digital_asset[]" value="Facebook Group" {{ (is_array(old('digital_asset')) && (in_array('Facebook Group', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Facebook Group</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="SMS Blast">
+                                        <input type="checkbox" name="digital_asset[]" value="SMS Blast" {{ (is_array(old('digital_asset')) && (in_array('SMS Blast', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">SMS Blast</label>
                                     </div>
                                     <div class="checkbox-custom checkbox-primary">
-                                        <input type="checkbox" name="digital_asset[]" value="Email Blast">
+                                        <input type="checkbox" name="digital_asset[]" value="Email Blast" {{ (is_array(old('digital_asset')) && (in_array('Email Blast', old('digital_asset')))) ? ' checked' : '' }}>
                                         <label for="digital_asset[]">Email Blast</label>
                                     </div>
                                 </div>
