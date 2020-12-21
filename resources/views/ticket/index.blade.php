@@ -20,15 +20,7 @@
                         <label for="name" class="col-md-4 col-form-label text-md-right">Project ID<span
                                 class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="project_id" type="text"
-                                class="form-control fieldColor @error('project_id') is-invalid @enderror"
-                                name="project_id" value="{{ session('projectid') }}" readonly>
-
-                            @error('project_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            <h5>{{ session('projectid') }}</h5>
                         </div>
                     </div>
 
@@ -98,7 +90,7 @@
                         <div class="col-md-6">
                             <select id="user_destination" name="user_destination" class="form-control fieldColor">
                                 @foreach ($accountDigital as $key => $val)
-                                    <option value="{{ $key }}">{{ $val }}</option>
+                                    <option value="{{ $key }}" {{ (old('user_destination') == $key) ? "selected" : "" }}>{{ $val }}</option>
                                 @endforeach
                             </select>
                             @error('user_destination')
