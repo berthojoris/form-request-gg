@@ -17,10 +17,10 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">Project ID<span
-                                class="required">*</span></label>
-                        <div class="col-md-6">
-                            <h5>{{ session('projectid') }}</h5>
+                        <div class="col-md-12">
+                            <div class="alert alert-info text-center" role="alert">
+                                {{ session('projectid') }}
+                              </div>
                         </div>
                     </div>
 
@@ -341,15 +341,19 @@
                                         <span class="input-group-addon">
                                             <i class="icon wb-calendar" aria-hidden="true"></i>
                                         </span>
-                                        <input type="text" class="form-control" name="start" />
+                                        <input type="text" class="form-control" name="start" value="{{ old('start') }}" />
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon">to</span>
-                                        <input type="text" class="form-control" name="end" />
+                                        <input type="text" class="form-control" name="end" value="{{ old('end') }}" />
                                     </div>
                                 </div>
                             </div>
                             @error('start')
+                            <small style="display: inline;" class="invalid-feedback" data-fv-validator="notEmpty"
+                                data-fv-for="porto_is" data-fv-result="INVALID">{{ $message }}</small>
+                            @enderror
+                            @error('end')
                             <small style="display: inline;" class="invalid-feedback" data-fv-validator="notEmpty"
                                 data-fv-for="porto_is" data-fv-result="INVALID">{{ $message }}</small>
                             @enderror
