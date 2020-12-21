@@ -199,13 +199,13 @@
                             <div class="row @error('target_audience') redBox m5 @enderror">
                                 <div class="col-md-12">
                                     <div class="radio-custom checkbox-primary">
-                                        <input type="radio" name="target_audience" value="National Wide">
+                                        <input type="radio" name="target_audience" value="National Wide" @if (old('target_audience') == "National Wide") checked @endif>
                                         <label for="target_audience">National Wide</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="radio-custom checkbox-primary">
-                                        <input type="radio" name="target_audience" value="Selected City">
+                                        <input type="radio" name="target_audience" value="Selected City" @if (old('target_audience') == "Selected City") checked @endif>
                                         <label for="target_audience">Selected City</label>
                                     </div>
                                 </div>

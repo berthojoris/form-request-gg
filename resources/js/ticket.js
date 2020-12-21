@@ -3,11 +3,26 @@ $(document).ready(function() {
         $("#input_city").val('')
         if ($(this).is(':checked')) {
             if ($(this).val() == "Selected City") {
-                $("#hideShow").removeClass("hidePanel")
-                $("#input_city").focus()
+                showSelectedCity()
             } else {
-                $("#hideShow").addClass("hidePanel")
+                hideSelectedCity()
             }
         }
-    });
-});
+    })
+
+    if ($("input[type='radio']:checked").val() == "Selected City") {
+        showSelectedCity()
+    } else {
+        hideSelectedCity()
+    }
+})
+
+function hideSelectedCity() {
+    $("#input_city").val('')
+    $("#hideShow").addClass("hidePanel")
+}
+
+function showSelectedCity() {
+    $("#hideShow").removeClass("hidePanel")
+    $("#input_city").focus()
+}
