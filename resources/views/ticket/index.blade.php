@@ -112,44 +112,48 @@
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Digital Asset<span
                                 class="required">*</span></label>
-                        <div class="col-md-3 @error('digital_asset') is-invalid @enderror">
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Webiste">
-                                <label for="digital_asset[]">Webiste</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Mobile Apps">
-                                <label for="digital_asset[]">Mobile Apps</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Instagram">
-                                <label for="digital_asset[]">Instagram</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Facebook">
-                                <label for="digital_asset[]">Facebook</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Twitter">
-                                <label for="digital_asset[]">Twitter</label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Youtube">
-                                <label for="digital_asset[]">Youtube</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Facebook Group">
-                                <label for="digital_asset[]">Facebook Group</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="SMS Blast">
-                                <label for="digital_asset[]">SMS Blast</label>
-                            </div>
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="digital_asset[]" value="Email Blast">
-                                <label for="digital_asset[]">Email Blast</label>
+                        <div class="col-md-6">
+                            <div class="row @error('digital_asset') redBox @enderror">
+                                <div class="col-md-4">
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Webiste">
+                                        <label for="digital_asset[]">Webiste</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Mobile Apps">
+                                        <label for="digital_asset[]">Mobile Apps</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Instagram">
+                                        <label for="digital_asset[]">Instagram</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Facebook">
+                                        <label for="digital_asset[]">Facebook</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Twitter">
+                                        <label for="digital_asset[]">Twitter</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Youtube">
+                                        <label for="digital_asset[]">Youtube</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Facebook Group">
+                                        <label for="digital_asset[]">Facebook Group</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="SMS Blast">
+                                        <label for="digital_asset[]">SMS Blast</label>
+                                    </div>
+                                    <div class="checkbox-custom checkbox-primary">
+                                        <input type="checkbox" name="digital_asset[]" value="Email Blast">
+                                        <label for="digital_asset[]">Email Blast</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @error('digital_asset')
@@ -334,15 +338,17 @@
                                 class="required">*</span></label>
                         <div class="col-md-6">
                             <div class="input-daterange" data-plugin="datepicker">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon wb-calendar" aria-hidden="true"></i>
-                                    </span>
-                                    <input type="text" class="form-control" name="start" />
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">to</span>
-                                    <input type="text" class="form-control" name="end" />
+                                <div class="row m5 @error('estimated_budget') redBox @enderror">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="icon wb-calendar" aria-hidden="true"></i>
+                                        </span>
+                                        <input type="text" class="form-control" name="start" />
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">to</span>
+                                        <input type="text" class="form-control" name="end" />
+                                    </div>
                                 </div>
                             </div>
                             @error('start')

@@ -33,6 +33,15 @@
     <link rel="stylesheet" href="{{ asset('global/fonts/web-icons/web-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('global/fonts/brand-icons/brand-icons.min.css') }}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <style>
+        .redBox {
+            border: 1px solid red;
+            border-radius: .215rem;
+        }
+        .m5 {
+            margin: 5px 0px 5px 0px;
+        }
+    </style>
     @stack('custom_css')
 
     <!--[if lt IE 9]>
